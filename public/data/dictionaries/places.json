@@ -1,0 +1,167 @@
+[
+  {
+    "term": "Jerusalem",
+    "category": "place",
+    "definition": "The holy city, capital of ancient Israel. Site of Solomon's Temple and later the second Temple. Jesus was crucified and resurrected here. Central to Jewish, Christian, and Islamic faith.",
+    "references": [
+      "2 Samuel 5:6-7",
+      "1 Kings 6:1",
+      "Luke 19:41",
+      "Revelation 21:2"
+    ]
+  },
+  {
+    "term": "Bethlehem",
+    "category": "place",
+    "definition": "A small town in Judea, about 6 miles south of Jerusalem. Birthplace of King David and of Jesus Christ. The name means 'house of bread.'",
+    "references": [
+      "Ruth 1:22",
+      "1 Samuel 16:1",
+      "Micah 5:2",
+      "Matthew 2:1"
+    ]
+  },
+  {
+    "term": "Egypt",
+    "category": "place",
+    "definition": "An ancient civilization along the Nile River. The Israelites were enslaved there for 400 years before the Exodus. Joseph rose to power there, and Jesus' family fled there to escape Herod.",
+    "references": [
+      "Genesis 41:41",
+      "Exodus 1:11",
+      "Exodus 12:31",
+      "Matthew 2:13-14"
+    ]
+  },
+  {
+    "term": "Sinai",
+    "category": "place",
+    "definition": "The mountain (also called Horeb) where God gave Moses the Ten Commandments. Located in the wilderness between Egypt and Canaan, it was the site of God's covenant with Israel.",
+    "references": [
+      "Exodus 19:18-20",
+      "Exodus 20:1-17",
+      "Deuteronomy 5:2",
+      "Galatians 4:24-25"
+    ]
+  },
+  {
+    "term": "Canaan",
+    "category": "place",
+    "definition": "The Promised Land, the territory God pledged to Abraham and his descendants. It encompassed roughly modern-day Israel, Palestine, Lebanon, and parts of Jordan and Syria.",
+    "references": [
+      "Genesis 12:7",
+      "Numbers 13:2",
+      "Joshua 1:2-4",
+      "Hebrews 11:9"
+    ]
+  },
+  {
+    "term": "Babylon",
+    "category": "place",
+    "definition": "An ancient city and empire in Mesopotamia (modern Iraq). Under Nebuchadnezzar, it conquered Jerusalem and exiled the Jews. In Revelation, it symbolizes worldly power opposed to God.",
+    "references": [
+      "2 Kings 25:1",
+      "Daniel 1:1",
+      "Psalm 137:1",
+      "Revelation 18:2"
+    ]
+  },
+  {
+    "term": "Nazareth",
+    "category": "place",
+    "definition": "A small town in lower Galilee where Jesus grew up. Though insignificant in Old Testament times, it became forever associated with Jesus, who was called 'Jesus of Nazareth.'",
+    "references": [
+      "Matthew 2:23",
+      "Luke 2:39",
+      "Luke 4:16",
+      "John 1:46"
+    ]
+  },
+  {
+    "term": "Galilee",
+    "category": "place",
+    "definition": "A region in northern Israel where Jesus spent most of his ministry. The Sea of Galilee (also called Tiberias or Gennesaret) was where Jesus called his first disciples and performed many miracles.",
+    "references": [
+      "Matthew 4:18",
+      "Matthew 4:23",
+      "Mark 1:16",
+      "John 6:1"
+    ]
+  },
+  {
+    "term": "Jordan",
+    "category": "place",
+    "definition": "The major river of Israel, flowing from Mount Hermon south to the Dead Sea. The Israelites crossed it to enter the Promised Land, and Jesus was baptized in its waters by John the Baptist.",
+    "references": [
+      "Joshua 3:17",
+      "2 Kings 5:10",
+      "Matthew 3:13",
+      "Mark 1:9"
+    ]
+  },
+  {
+    "term": "Jericho",
+    "category": "place",
+    "definition": "One of the oldest cities in the world, near the Jordan River. It was the first city conquered by Israel under Joshua when its walls miraculously fell. Jesus healed blind Bartimaeus here.",
+    "references": [
+      "Joshua 6:20",
+      "2 Kings 2:4",
+      "Mark 10:46",
+      "Luke 19:1"
+    ]
+  },
+  {
+    "term": "Eden",
+    "category": "place",
+    "definition": "The garden God planted as the first home for Adam and Eve. A paradise with the Tree of Life and the Tree of Knowledge of Good and Evil. Its exact location is debated.",
+    "references": [
+      "Genesis 2:8",
+      "Genesis 2:15",
+      "Genesis 3:23-24",
+      "Ezekiel 28:13"
+    ]
+  },
+  {
+    "term": "Nineveh",
+    "category": "place",
+    "definition": "The capital of the ancient Assyrian Empire. God sent the prophet Jonah to preach repentance there. The city repented, but later returned to wickedness and was destroyed as prophesied by Nahum.",
+    "references": [
+      "Jonah 1:2",
+      "Jonah 3:5",
+      "Nahum 1:1",
+      "Nahum 3:7"
+    ]
+  },
+  {
+    "term": "Rome",
+    "category": "place",
+    "definition": "Capital of the Roman Empire, which ruled the known world during Jesus' time. Paul was imprisoned and eventually martyred there. He wrote his letter to the Romans addressing the church in this city.",
+    "references": [
+      "Acts 28:16",
+      "Romans 1:7",
+      "2 Timothy 1:17",
+      "Revelation 17:9"
+    ]
+  },
+  {
+    "term": "Bethany",
+    "category": "place",
+    "definition": "A village on the eastern slope of the Mount of Olives, about 2 miles from Jerusalem. Home of Mary, Martha, and Lazarus, whom Jesus raised from the dead.",
+    "references": [
+      "John 11:1",
+      "John 11:43-44",
+      "Mark 11:11",
+      "Luke 24:50"
+    ]
+  },
+  {
+    "term": "Gethsemane",
+    "category": "place",
+    "definition": "A garden at the foot of the Mount of Olives where Jesus prayed in agony before his arrest. The name means 'oil press,' reflecting its location among olive trees.",
+    "references": [
+      "Matthew 26:36",
+      "Mark 14:32",
+      "Luke 22:44",
+      "John 18:1"
+    ]
+  }
+]

@@ -1,0 +1,167 @@
+[
+  {
+    "term": "Faith",
+    "category": "topic",
+    "definition": "Complete trust and confidence in God and His promises. Described as 'the substance of things hoped for, the evidence of things not seen.' A central theme throughout Scripture.",
+    "references": [
+      "Hebrews 11:1",
+      "Habakkuk 2:4",
+      "Romans 1:17",
+      "Ephesians 2:8-9"
+    ]
+  },
+  {
+    "term": "Grace",
+    "category": "topic",
+    "definition": "God's unmerited favor toward humanity. A foundational concept in Christian theology — salvation comes not through human effort but through God's gracious gift through Jesus Christ.",
+    "references": [
+      "Ephesians 2:8-9",
+      "Romans 3:24",
+      "2 Corinthians 12:9",
+      "Titus 2:11"
+    ]
+  },
+  {
+    "term": "Salvation",
+    "category": "topic",
+    "definition": "Deliverance from sin and its consequences. In the Old Testament, God saved Israel from physical enemies. In the New Testament, salvation refers primarily to spiritual redemption through faith in Christ.",
+    "references": [
+      "Psalm 27:1",
+      "Isaiah 12:2",
+      "John 3:16-17",
+      "Acts 4:12"
+    ]
+  },
+  {
+    "term": "Love",
+    "category": "topic",
+    "definition": "The greatest virtue and a defining attribute of God. God's love (agape) is unconditional and sacrificial. Jesus summarized the law as loving God and loving one's neighbor.",
+    "references": [
+      "1 John 4:8",
+      "John 3:16",
+      "1 Corinthians 13:4-7",
+      "Matthew 22:37-39"
+    ]
+  },
+  {
+    "term": "Covenant",
+    "category": "topic",
+    "definition": "A binding agreement between God and His people. Key covenants include those with Noah, Abraham, Moses, David, and the New Covenant through Jesus Christ.",
+    "references": [
+      "Genesis 9:11",
+      "Genesis 17:7",
+      "Jeremiah 31:31-34",
+      "Hebrews 8:6-13"
+    ]
+  },
+  {
+    "term": "Redemption",
+    "category": "topic",
+    "definition": "The act of buying back or setting free. In Scripture, it refers to God delivering His people from bondage — both physical (Exodus) and spiritual (through Christ's sacrifice).",
+    "references": [
+      "Exodus 6:6",
+      "Ruth 4:4-6",
+      "Ephesians 1:7",
+      "1 Peter 1:18-19"
+    ]
+  },
+  {
+    "term": "Prayer",
+    "category": "topic",
+    "definition": "Communication with God. Includes praise, thanksgiving, confession, and petition. Jesus taught his disciples to pray through the Lord's Prayer and modeled a life of prayer.",
+    "references": [
+      "Matthew 6:9-13",
+      "Philippians 4:6",
+      "1 Thessalonians 5:17",
+      "James 5:16"
+    ]
+  },
+  {
+    "term": "Prophecy",
+    "category": "topic",
+    "definition": "Messages from God delivered through prophets. Includes both foretelling future events and forth-telling God's truth. Messianic prophecies pointed to Jesus Christ.",
+    "references": [
+      "Isaiah 53:1-12",
+      "Joel 2:28",
+      "2 Peter 1:21",
+      "Revelation 19:10"
+    ]
+  },
+  {
+    "term": "Resurrection",
+    "category": "topic",
+    "definition": "The raising of the dead to life. Christ's resurrection is the foundation of Christian faith and the promise that believers will also be raised to eternal life.",
+    "references": [
+      "John 11:25",
+      "1 Corinthians 15:20-22",
+      "1 Corinthians 15:42-44",
+      "Revelation 20:6"
+    ]
+  },
+  {
+    "term": "Sin",
+    "category": "topic",
+    "definition": "Transgression against God's law and falling short of His standards. It entered the world through Adam and Eve's disobedience, affecting all humanity.",
+    "references": [
+      "Romans 3:23",
+      "Romans 6:23",
+      "1 John 1:8-9",
+      "James 1:15"
+    ]
+  },
+  {
+    "term": "Kingdom of God",
+    "category": "topic",
+    "definition": "God's sovereign rule over all creation. Jesus proclaimed its arrival and described it in many parables. It is both a present spiritual reality and a future consummation.",
+    "references": [
+      "Matthew 4:17",
+      "Matthew 13:31-33",
+      "Mark 1:15",
+      "Luke 17:20-21"
+    ]
+  },
+  {
+    "term": "Holy Spirit",
+    "category": "topic",
+    "definition": "The third person of the Trinity. The Spirit inspired Scripture, empowers believers, convicts of sin, and produces fruit (love, joy, peace, etc.) in the lives of Christians.",
+    "references": [
+      "John 14:26",
+      "Acts 1:8",
+      "Romans 8:26",
+      "Galatians 5:22-23"
+    ]
+  },
+  {
+    "term": "Forgiveness",
+    "category": "topic",
+    "definition": "The act of pardoning offenses. God forgives sins through Christ's sacrifice. Jesus taught that receiving God's forgiveness obligates believers to forgive others.",
+    "references": [
+      "Psalm 103:12",
+      "Matthew 6:14-15",
+      "Ephesians 4:32",
+      "Colossians 3:13"
+    ]
+  },
+  {
+    "term": "Wisdom",
+    "category": "topic",
+    "definition": "The ability to apply knowledge rightly. In Scripture, true wisdom begins with the fear of the Lord. Proverbs and Ecclesiastes are dedicated wisdom literature.",
+    "references": [
+      "Proverbs 1:7",
+      "Proverbs 9:10",
+      "James 1:5",
+      "1 Corinthians 1:30"
+    ]
+  },
+  {
+    "term": "Hope",
+    "category": "topic",
+    "definition": "Confident expectation based on God's promises. Biblical hope is not wishful thinking but a sure anchor for the soul, especially regarding eternal life and Christ's return.",
+    "references": [
+      "Romans 8:24-25",
+      "Romans 15:13",
+      "Hebrews 6:19",
+      "1 Peter 1:3"
+    ]
+  }
+]

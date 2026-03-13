@@ -43,6 +43,6 @@ export interface DictionaryEntry {
   references: string[];
 }
 
-export type Translation = 'asv' | 'kjv';
+export type Translation = 'nasb';
 
-export type ViewMode = 'read' | 'search' | 'bookmarks' | 'dictionary' | 'compare';
+export type ViewMode = 'read' | 'search' | 'bookmarks' | 'dictionary';

@@ -1,0 +1,277 @@
+[
+  {
+    "term": "Abraham",
+    "category": "person",
+    "definition": "Father of the Hebrew nation. Originally called Abram, God renamed him Abraham ('father of many nations'). He was called by God to leave Ur of the Chaldees and journey to Canaan. His faith was tested when God asked him to sacrifice his son Isaac.",
+    "references": [
+      "Genesis 12:1",
+      "Genesis 17:5",
+      "Genesis 22:1-2",
+      "Hebrews 11:8"
+    ]
+  },
+  {
+    "term": "Moses",
+    "category": "person",
+    "definition": "The great Hebrew leader, lawgiver, and prophet who led the Israelites out of Egyptian slavery. He received the Ten Commandments on Mount Sinai and authored the first five books of the Bible (the Pentateuch).",
+    "references": [
+      "Exodus 2:10",
+      "Exodus 3:1-10",
+      "Exodus 20:1-17",
+      "Deuteronomy 34:10"
+    ]
+  },
+  {
+    "term": "David",
+    "category": "person",
+    "definition": "The second king of Israel, a shepherd boy who defeated Goliath. Known as 'a man after God's own heart,' he united Israel and established Jerusalem as the capital. Author of many Psalms.",
+    "references": [
+      "1 Samuel 16:11-13",
+      "1 Samuel 17:50",
+      "2 Samuel 5:3",
+      "Acts 13:22"
+    ]
+  },
+  {
+    "term": "Solomon",
+    "category": "person",
+    "definition": "Son of David and third king of Israel, renowned for his wisdom. He built the first Temple in Jerusalem. Author of Proverbs, Ecclesiastes, and Song of Solomon.",
+    "references": [
+      "1 Kings 3:12",
+      "1 Kings 6:1",
+      "1 Kings 10:23",
+      "Proverbs 1:1"
+    ]
+  },
+  {
+    "term": "Adam",
+    "category": "person",
+    "definition": "The first man, created by God from the dust of the ground. God breathed life into him and placed him in the Garden of Eden. He is the ancestor of all humanity.",
+    "references": [
+      "Genesis 1:27",
+      "Genesis 2:7",
+      "Genesis 3:19",
+      "Romans 5:14"
+    ]
+  },
+  {
+    "term": "Eve",
+    "category": "person",
+    "definition": "The first woman, made by God from Adam's rib. She was deceived by the serpent in the Garden of Eden and ate the forbidden fruit. She is called 'the mother of all living.'",
+    "references": [
+      "Genesis 2:22",
+      "Genesis 3:6",
+      "Genesis 3:20",
+      "2 Corinthians 11:3"
+    ]
+  },
+  {
+    "term": "Noah",
+    "category": "person",
+    "definition": "A righteous man who found favor with God. God commanded him to build an ark to save his family and pairs of all animals from the great flood that destroyed the earth.",
+    "references": [
+      "Genesis 6:8-9",
+      "Genesis 7:1",
+      "Genesis 9:1",
+      "Hebrews 11:7"
+    ]
+  },
+  {
+    "term": "Jacob",
+    "category": "person",
+    "definition": "Son of Isaac and Rebekah, twin brother of Esau. He wrestled with God and was renamed Israel. Father of twelve sons who became the twelve tribes of Israel.",
+    "references": [
+      "Genesis 25:26",
+      "Genesis 32:28",
+      "Genesis 35:22-26",
+      "Hebrews 11:21"
+    ]
+  },
+  {
+    "term": "Joseph",
+    "category": "person",
+    "definition": "Favorite son of Jacob, sold into slavery by his jealous brothers. He rose to become second-in-command of Egypt and saved his family during a great famine.",
+    "references": [
+      "Genesis 37:3",
+      "Genesis 39:1-2",
+      "Genesis 41:41",
+      "Genesis 45:4-5"
+    ]
+  },
+  {
+    "term": "Isaiah",
+    "category": "person",
+    "definition": "One of the greatest Old Testament prophets, often called the 'Messianic Prophet' for his detailed prophecies about the coming Messiah, including the Suffering Servant passages.",
+    "references": [
+      "Isaiah 1:1",
+      "Isaiah 6:1-8",
+      "Isaiah 53:1-12",
+      "Matthew 3:3"
+    ]
+  },
+  {
+    "term": "Elijah",
+    "category": "person",
+    "definition": "A powerful prophet of Israel who confronted King Ahab and the prophets of Baal on Mount Carmel. He was taken up to heaven in a chariot of fire without experiencing death.",
+    "references": [
+      "1 Kings 17:1",
+      "1 Kings 18:36-39",
+      "2 Kings 2:11",
+      "Malachi 4:5"
+    ]
+  },
+  {
+    "term": "Daniel",
+    "category": "person",
+    "definition": "A Hebrew exile in Babylon known for his faithfulness to God. He interpreted dreams, survived the lions' den, and received apocalyptic visions about future kingdoms.",
+    "references": [
+      "Daniel 1:6",
+      "Daniel 2:28",
+      "Daniel 6:22",
+      "Daniel 7:13-14"
+    ]
+  },
+  {
+    "term": "Paul",
+    "category": "person",
+    "definition": "Originally Saul of Tarsus, a Pharisee who persecuted Christians. After a dramatic conversion on the road to Damascus, he became the greatest missionary of the early church and authored many New Testament epistles.",
+    "references": [
+      "Acts 9:1-6",
+      "Acts 13:9",
+      "Romans 1:1",
+      "2 Timothy 4:7"
+    ]
+  },
+  {
+    "term": "Peter",
+    "category": "person",
+    "definition": "One of the twelve apostles, originally named Simon. Jesus called him 'the rock' (Petros). He was a fisherman who became a leader of the early church and preached the first sermon at Pentecost.",
+    "references": [
+      "Matthew 4:18",
+      "Matthew 16:18",
+      "Acts 2:14",
+      "1 Peter 1:1"
+    ]
+  },
+  {
+    "term": "Mary",
+    "category": "person",
+    "definition": "The mother of Jesus, a young virgin from Nazareth. The angel Gabriel announced to her that she would conceive by the Holy Spirit and bear the Son of God.",
+    "references": [
+      "Luke 1:26-38",
+      "Matthew 1:18-25",
+      "John 2:1-5",
+      "Acts 1:14"
+    ]
+  },
+  {
+    "term": "Jesus",
+    "category": "person",
+    "definition": "The central figure of Christianity, believed to be the Son of God and the promised Messiah. Born in Bethlehem, he taught, performed miracles, was crucified, and rose from the dead.",
+    "references": [
+      "Matthew 1:21",
+      "John 1:1-14",
+      "John 3:16",
+      "1 Corinthians 15:3-4"
+    ]
+  },
+  {
+    "term": "John",
+    "category": "person",
+    "definition": "One of the twelve apostles, known as 'the disciple whom Jesus loved.' Son of Zebedee, he authored the Gospel of John, three epistles, and the Book of Revelation.",
+    "references": [
+      "Matthew 4:21",
+      "John 13:23",
+      "John 21:24",
+      "Revelation 1:1"
+    ]
+  },
+  {
+    "term": "Ruth",
+    "category": "person",
+    "definition": "A Moabite woman who chose to follow her mother-in-law Naomi and the God of Israel after her husband's death. She married Boaz and became an ancestor of King David and Jesus.",
+    "references": [
+      "Ruth 1:16",
+      "Ruth 4:13",
+      "Ruth 4:17",
+      "Matthew 1:5"
+    ]
+  },
+  {
+    "term": "Esther",
+    "category": "person",
+    "definition": "A Jewish queen of Persia who risked her life to save her people from a plot of extermination devised by Haman. Her courage is commemorated in the festival of Purim.",
+    "references": [
+      "Esther 2:17",
+      "Esther 4:14",
+      "Esther 7:3-4",
+      "Esther 9:26"
+    ]
+  },
+  {
+    "term": "Jeremiah",
+    "category": "person",
+    "definition": "Known as the 'weeping prophet,' he prophesied during the fall of Jerusalem. He warned of coming judgment while also prophesying a new covenant that God would make with His people.",
+    "references": [
+      "Jeremiah 1:5",
+      "Jeremiah 31:31-34",
+      "Lamentations 1:1",
+      "Matthew 16:14"
+    ]
+  },
+  {
+    "term": "Samuel",
+    "category": "person",
+    "definition": "The last judge and first major prophet of Israel. Dedicated to God by his mother Hannah before birth, he anointed both Saul and David as kings of Israel.",
+    "references": [
+      "1 Samuel 1:20",
+      "1 Samuel 3:10",
+      "1 Samuel 10:1",
+      "1 Samuel 16:13"
+    ]
+  },
+  {
+    "term": "Joshua",
+    "category": "person",
+    "definition": "Moses' successor who led the Israelites into the Promised Land. He commanded the conquest of Canaan, beginning with the fall of Jericho.",
+    "references": [
+      "Joshua 1:1-2",
+      "Joshua 6:20",
+      "Joshua 24:15",
+      "Hebrews 4:8"
+    ]
+  },
+  {
+    "term": "Jonah",
+    "category": "person",
+    "definition": "A reluctant prophet whom God sent to preach repentance to Nineveh. He tried to flee by ship but was swallowed by a great fish for three days before obeying God's command.",
+    "references": [
+      "Jonah 1:2-3",
+      "Jonah 1:17",
+      "Jonah 3:5",
+      "Matthew 12:40"
+    ]
+  },
+  {
+    "term": "Job",
+    "category": "person",
+    "definition": "A wealthy and righteous man from the land of Uz. God allowed Satan to test his faith through severe suffering and loss. Despite his trials, Job maintained his integrity before God.",
+    "references": [
+      "Job 1:1",
+      "Job 1:21",
+      "Job 42:10",
+      "James 5:11"
+    ]
+  },
+  {
+    "term": "Sarah",
+    "category": "person",
+    "definition": "Wife of Abraham, originally named Sarai. Despite being barren for many years, God promised she would bear a son. She gave birth to Isaac at age 90.",
+    "references": [
+      "Genesis 17:15",
+      "Genesis 18:12",
+      "Genesis 21:1-3",
+      "Hebrews 11:11"
+    ]
+  }
+]

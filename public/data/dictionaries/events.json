@@ -1,0 +1,155 @@
+[
+  {
+    "term": "Creation",
+    "category": "event",
+    "definition": "God's creation of the universe, earth, and all life in six days, resting on the seventh. Establishes God as sovereign Creator and humanity as made in His image.",
+    "references": [
+      "Genesis 1:1",
+      "Genesis 1:27",
+      "Genesis 2:2",
+      "John 1:3"
+    ]
+  },
+  {
+    "term": "The Fall",
+    "category": "event",
+    "definition": "Adam and Eve's disobedience in eating from the Tree of Knowledge of Good and Evil, resulting in sin entering the world, separation from God, and mortality for all humanity.",
+    "references": [
+      "Genesis 3:6-7",
+      "Genesis 3:19",
+      "Genesis 3:23-24",
+      "Romans 5:12"
+    ]
+  },
+  {
+    "term": "The Flood",
+    "category": "event",
+    "definition": "God's judgment on the wickedness of humanity by sending a catastrophic flood that covered the entire earth. Only Noah, his family, and the animals on the ark were saved.",
+    "references": [
+      "Genesis 6:17",
+      "Genesis 7:11-12",
+      "Genesis 8:1",
+      "1 Peter 3:20"
+    ]
+  },
+  {
+    "term": "The Exodus",
+    "category": "event",
+    "definition": "The departure of the Israelites from slavery in Egypt, led by Moses. God sent ten plagues upon Egypt and parted the Red Sea to deliver His people.",
+    "references": [
+      "Exodus 12:31-42",
+      "Exodus 14:21-22",
+      "Psalm 78:12-16",
+      "Hebrews 11:29"
+    ]
+  },
+  {
+    "term": "The Passover",
+    "category": "event",
+    "definition": "The night when God's angel of death 'passed over' the homes of Israelites marked with lamb's blood, killing the firstborn of Egypt. It became Israel's most important annual festival.",
+    "references": [
+      "Exodus 12:13",
+      "Exodus 12:26-27",
+      "1 Corinthians 5:7",
+      "Luke 22:15"
+    ]
+  },
+  {
+    "term": "Ten Commandments",
+    "category": "event",
+    "definition": "The foundational moral law given by God to Moses on Mount Sinai, written on two stone tablets. They address humanity's duty to God and to one another.",
+    "references": [
+      "Exodus 20:1-17",
+      "Exodus 34:28",
+      "Deuteronomy 5:6-21",
+      "Matthew 22:37-40"
+    ]
+  },
+  {
+    "term": "The Crucifixion",
+    "category": "event",
+    "definition": "The execution of Jesus Christ by Roman crucifixion at Golgotha (Calvary) outside Jerusalem. Christians believe this was the atoning sacrifice for the sins of all humanity.",
+    "references": [
+      "Matthew 27:35",
+      "Mark 15:24",
+      "Luke 23:33",
+      "John 19:18"
+    ]
+  },
+  {
+    "term": "The Resurrection",
+    "category": "event",
+    "definition": "Jesus Christ rising from the dead on the third day after his crucifixion. The cornerstone of Christian faith, it demonstrated victory over sin and death.",
+    "references": [
+      "Matthew 28:5-6",
+      "Mark 16:6",
+      "Luke 24:6-7",
+      "1 Corinthians 15:3-4"
+    ]
+  },
+  {
+    "term": "Pentecost",
+    "category": "event",
+    "definition": "The coming of the Holy Spirit upon the apostles fifty days after Jesus' resurrection. They spoke in tongues, and Peter preached, resulting in about 3,000 conversions — the birth of the Church.",
+    "references": [
+      "Acts 2:1-4",
+      "Acts 2:14",
+      "Acts 2:41",
+      "Joel 2:28-29"
+    ]
+  },
+  {
+    "term": "The Ascension",
+    "category": "event",
+    "definition": "Jesus' bodily return to heaven forty days after his resurrection. He was taken up into a cloud while his disciples watched from the Mount of Olives.",
+    "references": [
+      "Acts 1:9-11",
+      "Mark 16:19",
+      "Luke 24:50-51",
+      "Ephesians 4:8-10"
+    ]
+  },
+  {
+    "term": "Tower of Babel",
+    "category": "event",
+    "definition": "The attempt by post-flood humanity to build a tower reaching heaven, demonstrating their defiance of God. God confused their language, causing them to scatter across the earth.",
+    "references": [
+      "Genesis 11:1-9",
+      "Genesis 11:4",
+      "Genesis 11:7-8"
+    ]
+  },
+  {
+    "term": "The Exile",
+    "category": "event",
+    "definition": "The deportation of the people of Judah to Babylon by King Nebuchadnezzar in 586 BC after the destruction of Jerusalem and the Temple. It lasted approximately 70 years.",
+    "references": [
+      "2 Kings 25:1-11",
+      "Jeremiah 25:11",
+      "Psalm 137:1-4",
+      "Daniel 1:1-2"
+    ]
+  },
+  {
+    "term": "The Transfiguration",
+    "category": "event",
+    "definition": "An event where Jesus was transformed before Peter, James, and John on a high mountain. His face shone like the sun and his clothes became dazzling white, and Moses and Elijah appeared with him.",
+    "references": [
+      "Matthew 17:1-8",
+      "Mark 9:2-8",
+      "Luke 9:28-36",
+      "2 Peter 1:16-18"
+    ]
+  },
+  {
+    "term": "The Last Supper",
+    "category": "event",
+    "definition": "Jesus' final meal with his apostles on the night before his crucifixion. He instituted the Lord's Supper (Communion/Eucharist), breaking bread and sharing wine as symbols of his body and blood.",
+    "references": [
+      "Matthew 26:26-28",
+      "Mark 14:22-24",
+      "Luke 22:19-20",
+      "1 Corinthians 11:23-26"
+    ]
+  }
+]

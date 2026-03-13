@@ -1,18 +1,17 @@
 /**
- * Script to generate Bible JSON data files for the app.
- * Downloads public domain ASV and KJV Bible text from openbible-data
- * and structures them as per-book JSON files.
- * 
+ * Download NASB Bible text from bolls.life API and save as local JSON files.
+ * Fetches each chapter individually: GET https://bolls.life/get-text/NASB/{bookNum}/{chapter}/
+ * Returns array of { verse, text } per chapter.
+ *
  * Usage: node scripts/generate-bible-data.mjs
  */
 
-import { writeFileSync, mkdirSync, existsSync } from 'fs';
+import { writeFileSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import https from 'https';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DATA_DIR = join(__dirname, '..', 'public', 'data', 'bible');
+const OUT_DIR = join(__dirname, '..', 'public', 'data', 'bible', 'nasb');
 
 const BOOKS = [
   { name: 'Genesis', chapters: 50 }, { name: 'Exodus', chapters: 40 }, { name: 'Leviticus', chapters: 27 },
@@ -43,145 +42,75 @@ function bookFileName(name) {
   return name.toLowerCase().replace(/\s+/g, '-');
 }
 
-function fetch(url) {
-  return new Promise((resolve, reject) => {
-    const request = (u) => {
-      https.get(u, { headers: { 'User-Agent': 'verseapp-data-gen/1.0' } }, (res) => {
-        if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-          request(res.headers.location);
-          return;
-        }
-        if (res.statusCode !== 200) {
-          reject(new Error(`HTTP ${res.statusCode} for ${u}`));
-          return;
-        }
-        let data = '';
-        res.on('data', (chunk) => data += chunk);
-        res.on('end', () => resolve(data));
-        res.on('error', reject);
-      }).on('error', reject);
-    };
-    request(url);
-  });
+function sleep(ms) {
+  return new Promise(r => setTimeout(r, ms));
 }
 
 /**
- * Parse tab-separated Bible text (format: BookNum\tChapter\tVerse\tText)
- * This is the format used by many public domain Bible data sources.
+ * Fetch a single chapter from the bolls.life API.
+ * Returns array of { verse: number, text: string }.
  */
-function parseTSV(tsv, nameMap) {
-  const books = {};
-  const lines = tsv.split('\n');
-  for (const line of lines) {
-    if (!line.trim()) continue;
-    const parts = line.split('\t');
-    if (parts.length < 4) continue;
-    const bookNum = parseInt(parts[0], 10);
-    const chapter = parseInt(parts[1], 10);
-    const verse = parseInt(parts[2], 10);
-    const text = parts.slice(3).join('\t').trim();
-    if (isNaN(bookNum) || isNaN(chapter) || isNaN(verse) || !text) continue;
-    const bookName = nameMap[bookNum];
-    if (!bookName) continue;
-    if (!books[bookName]) books[bookName] = {};
-    if (!books[bookName][chapter]) books[bookName][chapter] = [];
-    books[bookName][chapter].push({ verse, text });
-  }
-  return books;
+async function fetchChapter(bookNum, chapter) {
+  const url = `https://bolls.life/get-text/NASB/${bookNum}/${chapter}/`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+  const data = await res.json();
+  // API returns [{pk, verse, chapter, book, text}, ...] — we only need verse + text
+  return data.map(v => ({
+    verse: v.verse,
+    text: (v.text || '').replace(/<[^>]*>/g, '').trim(),
+  }));
 }
-
-function buildNameMap() {
-  const map = {};
-  BOOKS.forEach((b, i) => { map[i + 1] = b.name; });
-  return map;
-}
-
-function writeBookFiles(translation, parsedBooks) {
-  const dir = join(DATA_DIR, translation);
-  mkdirSync(dir, { recursive: true });
-  
-  let count = 0;
-  for (const book of BOOKS) {
-    const bookData = parsedBooks[book.name];
-    if (!bookData) {
-      console.warn(`  Warning: no data for ${book.name} in ${translation}`);
-      continue;
-    }
-    const chapters = [];
-    for (let c = 1; c <= book.chapters; c++) {
-      const verses = bookData[c] || [];
-      verses.sort((a, b) => a.verse - b.verse);
-      chapters.push({ chapter: c, verses });
-    }
-    const json = { bookName: book.name, chapters };
-    const fileName = bookFileName(book.name) + '.json';
-    writeFileSync(join(dir, fileName), JSON.stringify(json));
-    count++;
-  }
-  console.log(`  Wrote ${count} book files for ${translation}`);
-}
-
-// Fallback: generate sample data if download fails
-function generateSampleData(translation) {
-  const dir = join(DATA_DIR, translation);
-  mkdirSync(dir, { recursive: true });
-
-  // Only generate a few sample books with real-looking placeholder text
-  const sampleVerses = {
-    'Genesis': {
-      1: [
-        'In the beginning God created the heavens and the earth.',
-        'And the earth was waste and void; and darkness was upon the face of the deep: and the Spirit of God moved upon the face of the waters.',
-        'And God said, Let there be light: and there was light.',
-        'And God saw the light, that it was good: and God divided the light from the darkness.',
-        'And God called the light Day, and the darkness he called Night. And there was evening and there was morning, one day.',
-      ],
-    },
-  };
-
-  for (const book of BOOKS) {
-    const chapters = [];
-    for (let c = 1; c <= book.chapters; c++) {
-      const verseTexts = sampleVerses[book.name]?.[c];
-      const verses = verseTexts
-        ? verseTexts.map((text, i) => ({ verse: i + 1, text }))
-        : [{ verse: 1, text: `[${book.name} ${c}:1 — ${translation.toUpperCase()} text]` }];
-      chapters.push({ chapter: c, verses });
-    }
-    const json = { bookName: book.name, chapters };
-    const fileName = bookFileName(book.name) + '.json';
-    writeFileSync(join(dir, fileName), JSON.stringify(json));
-  }
-  console.log(`  Wrote ${BOOKS.length} sample book files for ${translation}`);
-}
-
-// URLs for public domain Bible data in TSV format
-// These are from commonly available repositories
-const SOURCES = {
-  asv: 'https://raw.githubusercontent.com/scrollmapper/bible_databases/master/tsv/t_asv.tsv',
-  kjv: 'https://raw.githubusercontent.com/scrollmapper/bible_databases/master/tsv/t_kjv.tsv',
-};
 
 async function main() {
-  console.log('Generating Bible data files...\n');
-  const nameMap = buildNameMap();
+  console.log('Downloading NASB Bible from bolls.life API...\n');
+  mkdirSync(OUT_DIR, { recursive: true });
 
-  for (const [translation, url] of Object.entries(SOURCES)) {
-    console.log(`Processing ${translation.toUpperCase()}...`);
-    try {
-      console.log(`  Downloading from ${url}`);
-      const tsv = await fetch(url);
-      console.log(`  Downloaded ${(tsv.length / 1024).toFixed(0)} KB`);
-      const parsed = parseTSV(tsv, nameMap);
-      writeBookFiles(translation, parsed);
-    } catch (err) {
-      console.warn(`  Download failed: ${err.message}`);
-      console.log('  Generating sample data as fallback...');
-      generateSampleData(translation);
+  let totalVerses = 0;
+  const totalChapters = BOOKS.reduce((sum, b) => sum + b.chapters, 0);
+  let completedChapters = 0;
+
+  for (let bookIdx = 0; bookIdx < BOOKS.length; bookIdx++) {
+    const book = BOOKS[bookIdx];
+    const bookNum = bookIdx + 1;
+    const chapters = [];
+
+    process.stdout.write(`[${bookNum}/66] ${book.name} (${book.chapters} ch) `);
+
+    for (let ch = 1; ch <= book.chapters; ch++) {
+      try {
+        const verses = await fetchChapter(bookNum, ch);
+        totalVerses += verses.length;
+        chapters.push({ chapter: ch, verses });
+        process.stdout.write('.');
+      } catch (err) {
+        console.error(`\n  ERROR on ${book.name} ch${ch}: ${err.message}`);
+        // Retry once after a pause
+        await sleep(2000);
+        try {
+          const verses = await fetchChapter(bookNum, ch);
+          totalVerses += verses.length;
+          chapters.push({ chapter: ch, verses });
+          process.stdout.write('.');
+        } catch (err2) {
+          console.error(`  RETRY FAILED: ${err2.message}`);
+          chapters.push({ chapter: ch, verses: [] });
+          process.stdout.write('x');
+        }
+      }
+      completedChapters++;
+      // Small delay to be polite to the API
+      if (ch % 5 === 0) await sleep(100);
     }
+
+    const json = { bookName: book.name, chapters };
+    const filePath = join(OUT_DIR, bookFileName(book.name) + '.json');
+    writeFileSync(filePath, JSON.stringify(json));
+    console.log(` done (${completedChapters}/${totalChapters})`);
   }
 
-  console.log('\nDone! Bible data files are in public/data/bible/');
+  console.log(`\nComplete! ${totalVerses} verses across 66 books.`);
+  console.log(`Files saved to public/data/bible/nasb/`);
 }
 
-main().catch(console.error);
+main().catch(err => { console.error(err); process.exit(1); });
