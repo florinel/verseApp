@@ -7,6 +7,7 @@ import { VerseDisplay } from './VerseDisplay';
 import { SearchBar, SearchResultsView } from './SearchPanel';
 import { BookmarksPanel } from './BookmarksPanel';
 import { DictionaryBrowser } from './DictionaryBrowser';
+import { SettingsPanel } from './SettingsPanel';
 import { ViewMode } from '../types/bible';
 
 const NAV_ITEMS: { mode: ViewMode; label: string; icon: React.ReactNode }[] = [
@@ -34,8 +35,9 @@ const NAV_ITEMS: { mode: ViewMode; label: string; icon: React.ReactNode }[] = [
 
 export function AppLayout() {
   const { viewMode, setViewMode } = useBible();
-  const { dark, toggle, fontSerif, toggleFont } = useTheme();
+  const { dark, toggle } = useTheme();
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -99,15 +101,6 @@ export function AppLayout() {
             </button>
           </div>
           <div className="flex items-center gap-1">
-            {/* Font toggle */}
-            <button
-              onClick={toggleFont}
-              className="p-2 rounded-lg hover:bg-parchment-100 dark:hover:bg-gray-800 transition-colors text-sm"
-              title={fontSerif ? 'Switch to sans-serif' : 'Switch to serif'}
-              aria-label="Toggle font"
-            >
-              <span className={`text-gray-600 dark:text-gray-400 ${fontSerif ? 'font-serif' : 'font-sans'}`}>Aa</span>
-            </button>
             {/* Dark mode toggle */}
             <button
               onClick={toggle}
@@ -125,6 +118,18 @@ export function AppLayout() {
                 </svg>
               )}
             </button>
+            {/* Settings */}
+            <button
+              onClick={() => setSettingsOpen(true)}
+              className="p-2 rounded-lg hover:bg-parchment-100 dark:hover:bg-gray-800 transition-colors"
+              title="Settings"
+              aria-label="Settings"
+            >
+              <svg className="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </button>
           </div>
         </header>
 
@@ -132,18 +137,25 @@ export function AppLayout() {
         {(viewMode === 'read' || viewMode === 'bookmarks') && <ChapterSelector />}
 
         {/* Content area */}
-        <div className="flex-1 overflow-y-auto p-4">
-          {(viewMode === 'read' || viewMode === 'bookmarks') && <VerseDisplay />}
+        <div className="flex-1 overflow-hidden">
+          {(viewMode === 'read' || viewMode === 'bookmarks') && (
+            <div className="h-full overflow-y-auto p-4"><VerseDisplay /></div>
+          )}
           {viewMode === 'search' && <SearchResultsView />}
           {viewMode === 'dictionary' && (
-            <div className="max-w-3xl mx-auto text-center py-12">
-              <p className="text-gray-400 dark:text-gray-500">
-                Browse the dictionary in the sidebar, or click on highlighted terms in the reading view.
-              </p>
+            <div className="h-full overflow-y-auto p-4">
+              <div className="max-w-3xl mx-auto text-center py-12">
+                <p className="text-gray-400 dark:text-gray-500">
+                  Browse the dictionary in the sidebar, or click on highlighted terms in the reading view.
+                </p>
+              </div>
             </div>
           )}
         </div>
       </main>
+
+      {/* Settings modal */}
+      {settingsOpen && <SettingsPanel onClose={() => setSettingsOpen(false)} />}
     </div>
   );
 }

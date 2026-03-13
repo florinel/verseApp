@@ -6,11 +6,11 @@ export function ChapterSelector() {
 
   return (
     <div className="border-b border-parchment-200 dark:border-gray-800 bg-white/60 dark:bg-gray-900/60">
-      <div className="px-4 py-2 flex items-center gap-3">
-        <span className="text-sm font-semibold text-gray-700 dark:text-gray-200 whitespace-nowrap">
+      <div className="px-4 py-2 flex items-start gap-3">
+        <span className="text-sm font-semibold text-gray-700 dark:text-gray-200 whitespace-nowrap pt-1">
           {currentBook}
         </span>
-        <div className="flex-1 flex gap-1 overflow-x-auto py-1 scrollbar-thin">
+        <div className="flex-1 flex flex-wrap gap-1 py-1">
           {chapters.map(ch => (
             <button
               key={ch}

@@ -102,9 +102,10 @@ export function SearchProvider({ children }: { children: ReactNode }) {
       if (!abortRef.current) setDictResults(matchedDict);
     } catch { /* ignore */ }
 
-    // 3. Keyword search across all books
+    // 3. Keyword search across all books (whole-word matching)
     const found: SearchResult[] = [];
-    const lowerQuery = trimmed.toLowerCase();
+    const escaped = trimmed.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const wordRegex = new RegExp(`\\b${escaped}\\b`, 'i');
 
     for (const book of BIBLE_BOOKS) {
       if (abortRef.current) break;
@@ -115,7 +116,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
         const data = await res.json();
         for (const chapter of data.chapters) {
           for (const verse of chapter.verses) {
-            if (verse.text.toLowerCase().includes(lowerQuery)) {
+            if (wordRegex.test(verse.text)) {
               found.push({
                 bookName: book.name,
                 chapter: chapter.chapter,

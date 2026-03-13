@@ -1,12 +1,40 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, ReactNode } from 'react';
 import { DictionaryEntry } from '../types/bible';
 
-export function DictionaryPopover({ entry, children }: {
+/** Split definition text so that "-See TERM" becomes a clickable link */
+function renderDefinition(
+  text: string,
+  onNavigate?: (term: string) => void,
+): ReactNode {
+  // Match patterns like "-See GIFT" or "See TEMPERANCE"
+  const parts = text.split(/(-?See\s+[A-Z][A-Z, ]*[A-Z])/g);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) => {
+    const m = part.match(/^-?See\s+(.+)$/);
+    if (m && onNavigate) {
+      const term = m[1].trim();
+      return (
+        <button
+          key={i}
+          onClick={(e) => { e.stopPropagation(); onNavigate(term); }}
+          className="text-amber-700 dark:text-amber-400 hover:underline font-medium"
+        >
+          See {term}
+        </button>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
+}
+
+export function DictionaryPopover({ entry, children, onSearch }: {
   entry: DictionaryEntry;
   children: React.ReactNode;
+  onSearch?: (term: string) => void;
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const hoverTimeout = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   useEffect(() => {
     if (!open) return;
@@ -19,11 +47,21 @@ export function DictionaryPopover({ entry, children }: {
     return () => document.removeEventListener('mousedown', handler);
   }, [open]);
 
+  const handleMouseEnter = () => {
+    hoverTimeout.current = setTimeout(() => setOpen(true), 300);
+  };
+
+  const handleMouseLeave = () => {
+    if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
+  };
+
   return (
     <span className="relative inline" ref={ref}>
       <span
         className="dict-highlight"
         onClick={() => setOpen(!open)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         {children}
       </span>
@@ -46,7 +84,12 @@ export function DictionaryPopover({ entry, children }: {
               </svg>
             </button>
           </div>
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-2">{entry.definition}</p>
+          <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-2">
+            {renderDefinition(entry.definition, (term) => {
+              setOpen(false);
+              if (onSearch) onSearch(term);
+            })}
+          </p>
           {entry.references.length > 0 && (
             <div className="text-xs text-gray-500 dark:text-gray-400">
               <span className="font-semibold">References:</span>{' '}
