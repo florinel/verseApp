@@ -1,14 +1,9 @@
-import { useState, useCallback, useRef } from 'react';
+import { createContext, useContext, useState, useCallback, useRef, type ReactNode } from 'react';
 import { SearchResult, Translation, DictionaryEntry } from '../types/bible';
 import { BIBLE_BOOKS, bookFileName } from '../bibleBooks';
 
-/**
- * Parse a Bible reference like "John 3:16", "1 John 1:1", "Gen 1", "Psalms 23:1"
- * Returns { bookName, chapter, verse? } or null if not a reference.
- */
 function parseReference(input: string): { bookName: string; chapter: number; verse?: number } | null {
   const trimmed = input.trim();
-  // Match patterns like: "John 3:16", "1 John 1:1", "Genesis 1", "Gen 1", "Song of Solomon 2:3"
   const match = trimmed.match(/^(\d?\s*[A-Za-z][A-Za-z\s]*?)\s+(\d+)(?::(\d+))?$/);
   if (!match) return null;
 
@@ -16,7 +11,6 @@ function parseReference(input: string): { bookName: string; chapter: number; ver
   const chapter = parseInt(match[2], 10);
   const verse = match[3] ? parseInt(match[3], 10) : undefined;
 
-  // Find the book by name or abbreviation
   const book = BIBLE_BOOKS.find(b =>
     b.name.toLowerCase() === bookInput ||
     b.abbr.toLowerCase() === bookInput ||
@@ -28,7 +22,19 @@ function parseReference(input: string): { bookName: string; chapter: number; ver
   return { bookName: book.name, chapter, verse };
 }
 
-export function useSearch() {
+interface SearchState {
+  results: SearchResult[];
+  dictResults: DictionaryEntry[];
+  searching: boolean;
+  query: string;
+  refMatch: { bookName: string; chapter: number; verse?: number } | null;
+  search: (query: string, translation?: Translation) => Promise<void>;
+  clear: () => void;
+}
+
+const SearchContext = createContext<SearchState | null>(null);
+
+export function SearchProvider({ children }: { children: ReactNode }) {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [dictResults, setDictResults] = useState<DictionaryEntry[]>([]);
   const [searching, setSearching] = useState(false);
@@ -139,5 +145,15 @@ export function useSearch() {
     setSearching(false);
   }, []);
 
-  return { results, dictResults, searching, query, refMatch, search, clear };
+  return (
+    <SearchContext.Provider value={{ results, dictResults, searching, query, refMatch, search, clear }}>
+      {children}
+    </SearchContext.Provider>
+  );
+}
+
+export function useSearch() {
+  const ctx = useContext(SearchContext);
+  if (!ctx) throw new Error('useSearch must be used within SearchProvider');
+  return ctx;
 }

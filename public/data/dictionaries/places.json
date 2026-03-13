@@ -1,167 +1,1051 @@
 [
   {
-    "term": "Jerusalem",
+    "term": "heaven",
     "category": "place",
-    "definition": "The holy city, capital of ancient Israel. Site of Solomon's Temple and later the second Temple. Jesus was crucified and resurrected here. Central to Jewish, Christian, and Islamic faith.",
+    "definition": "The abode of stars (GEN 15:5, DEU 4:19, PSA 8:3, etc.) (astronomical; modern: the universe)",
     "references": [
-      "2 Samuel 5:6-7",
-      "1 Kings 6:1",
-      "Luke 19:41",
-      "Revelation 21:2"
+      "Genesis 1:1",
+      "Genesis 1:14",
+      "Genesis 1:15",
+      "Genesis 1:17",
+      "Genesis 2:1"
     ]
   },
   {
-    "term": "Bethlehem",
+    "term": "Earth",
     "category": "place",
-    "definition": "A small town in Judea, about 6 miles south of Jerusalem. Birthplace of King David and of Jesus Christ. The name means 'house of bread.'",
+    "definition": "The entire planet (GEN 1:1) (planetary; modern: Earth)",
     "references": [
-      "Ruth 1:22",
-      "1 Samuel 16:1",
-      "Micah 5:2",
-      "Matthew 2:1"
+      "Genesis 1:1",
+      "Genesis 1:2",
+      "Genesis 1:15",
+      "Genesis 1:17",
+      "Genesis 1:20"
     ]
   },
   {
-    "term": "Egypt",
+    "term": "waters",
     "category": "place",
-    "definition": "An ancient civilization along the Nile River. The Israelites were enslaved there for 400 years before the Exodus. Joseph rose to power there, and Jesus' family fled there to escape Herod.",
+    "definition": "The waters below and the waters above (GEN 1:7) (geographic component; modern: the oceans and the atmosphere)",
     "references": [
-      "Genesis 41:41",
-      "Exodus 1:11",
-      "Exodus 12:31",
-      "Matthew 2:13-14"
+      "Genesis 1:2",
+      "Genesis 1:6",
+      "Genesis 1:7",
+      "Genesis 1:9",
+      "Genesis 1:10"
     ]
   },
   {
-    "term": "Sinai",
+    "term": "seas",
     "category": "place",
-    "definition": "The mountain (also called Horeb) where God gave Moses the Ten Commandments. Located in the wilderness between Egypt and Canaan, it was the site of God's covenant with Israel.",
-    "references": [
-      "Exodus 19:18-20",
-      "Exodus 20:1-17",
-      "Deuteronomy 5:2",
-      "Galatians 4:24-25"
-    ]
+    "definition": "Seas (GEN 1:10), waters below the heavens (GEN 1:9) (geographic component; modern: oceas, seas (lakes?))",
+    "references": []
   },
   {
-    "term": "Canaan",
+    "term": "The Garden",
     "category": "place",
-    "definition": "The Promised Land, the territory God pledged to Abraham and his descendants. It encompassed roughly modern-day Israel, Palestine, Lebanon, and parts of Jordan and Syria.",
+    "definition": "Some location in Eden (geographic region; modern: uncertain)",
     "references": [
-      "Genesis 12:7",
-      "Numbers 13:2",
-      "Joshua 1:2-4",
-      "Hebrews 11:9"
-    ]
-  },
-  {
-    "term": "Babylon",
-    "category": "place",
-    "definition": "An ancient city and empire in Mesopotamia (modern Iraq). Under Nebuchadnezzar, it conquered Jerusalem and exiled the Jews. In Revelation, it symbolizes worldly power opposed to God.",
-    "references": [
-      "2 Kings 25:1",
-      "Daniel 1:1",
-      "Psalm 137:1",
-      "Revelation 18:2"
-    ]
-  },
-  {
-    "term": "Nazareth",
-    "category": "place",
-    "definition": "A small town in lower Galilee where Jesus grew up. Though insignificant in Old Testament times, it became forever associated with Jesus, who was called 'Jesus of Nazareth.'",
-    "references": [
-      "Matthew 2:23",
-      "Luke 2:39",
-      "Luke 4:16",
-      "John 1:46"
-    ]
-  },
-  {
-    "term": "Galilee",
-    "category": "place",
-    "definition": "A region in northern Israel where Jesus spent most of his ministry. The Sea of Galilee (also called Tiberias or Gennesaret) was where Jesus called his first disciples and performed many miracles.",
-    "references": [
-      "Matthew 4:18",
-      "Matthew 4:23",
-      "Mark 1:16",
-      "John 6:1"
-    ]
-  },
-  {
-    "term": "Jordan",
-    "category": "place",
-    "definition": "The major river of Israel, flowing from Mount Hermon south to the Dead Sea. The Israelites crossed it to enter the Promised Land, and Jesus was baptized in its waters by John the Baptist.",
-    "references": [
-      "Joshua 3:17",
-      "2 Kings 5:10",
-      "Matthew 3:13",
-      "Mark 1:9"
-    ]
-  },
-  {
-    "term": "Jericho",
-    "category": "place",
-    "definition": "One of the oldest cities in the world, near the Jordan River. It was the first city conquered by Israel under Joshua when its walls miraculously fell. Jesus healed blind Bartimaeus here.",
-    "references": [
-      "Joshua 6:20",
-      "2 Kings 2:4",
-      "Mark 10:46",
-      "Luke 19:1"
+      "Genesis 2:8",
+      "Genesis 2:9",
+      "Genesis 2:10",
+      "Genesis 2:15",
+      "Genesis 2:16"
     ]
   },
   {
     "term": "Eden",
     "category": "place",
-    "definition": "The garden God planted as the first home for Adam and Eve. A paradise with the Tree of Life and the Tree of Knowledge of Good and Evil. Its exact location is debated.",
+    "definition": "Various theories exist including locations in the Seychelles, Armenia, and others (geographic region; modern: uncertain)",
     "references": [
       "Genesis 2:8",
-      "Genesis 2:15",
-      "Genesis 3:23-24",
-      "Ezekiel 28:13"
+      "Genesis 2:10",
+      "Genesis 4:16"
+    ]
+  },
+  {
+    "term": "Pishon",
+    "category": "place",
+    "definition": "Various theories exist including Wadi Baysh, Persian Gulf, and others (river; modern: uncertain)",
+    "references": [
+      "Genesis 2:11"
+    ]
+  },
+  {
+    "term": "Havilah",
+    "category": "place",
+    "definition": "The gold of that land is good; the bdellium and the onyx stone are there (GEN 2:12).  Various theories exist regarding modern equivalents including locations in Babylonia, Arabia, and others. (geographic region; modern: uncertain)",
+    "references": [
+      "Genesis 2:11"
+    ]
+  },
+  {
+    "term": "Gihon",
+    "category": "place",
+    "definition": "It flows around the whole land of Cush (GEN 2:13).  Various theories exist about modern equivalents including the Nile River, Gihon Spring, and others. (river; modern: uncertain)",
+    "references": [
+      "Genesis 2:13"
+    ]
+  },
+  {
+    "term": "Cush",
+    "category": "place",
+    "definition": "First mention: GEN 2:13.  Various theories exist regarding modern equivalents including Ethiopia or locations in Babylonia. (geographic region; modern: uncertain)",
+    "references": [
+      "Genesis 2:13"
+    ]
+  },
+  {
+    "term": "Tigris",
+    "category": "place",
+    "definition": "It flows east of Assyria (GEN 2:14) (river; modern: Tigris River)",
+    "references": [
+      "Genesis 2:14"
+    ]
+  },
+  {
+    "term": "Assyria",
+    "category": "place",
+    "definition": "First mention: GEN 2:14 (geographic region; modern: partly Turkey and partly Iraq)",
+    "references": [
+      "Genesis 2:14",
+      "Genesis 10:11",
+      "Genesis 14:1",
+      "Genesis 14:9",
+      "Genesis 25:18"
+    ]
+  },
+  {
+    "term": "Euphrates",
+    "category": "place",
+    "definition": "First mention: GEN 2:14 (river; modern: Euphrates River)",
+    "references": [
+      "Genesis 2:14",
+      "Genesis 15:18",
+      "Genesis 31:21"
+    ]
+  },
+  {
+    "term": "Nod",
+    "category": "place",
+    "definition": "Only mentioned in GEN 4:16.  May be a term for wandering rather than a specific place. (geographic region; modern: uncertain)",
+    "references": [
+      "Genesis 4:16"
+    ]
+  },
+  {
+    "term": "Enoch",
+    "category": "place",
+    "definition": "Only mentioned in GEN 4:17 (city; modern: uncertain)",
+    "references": [
+      "Genesis 4:17"
+    ]
+  },
+  {
+    "term": "Ararat",
+    "category": "place",
+    "definition": "First mention: GEN 8:4 (geographic region; modern: Mount Ağrı in Turkey)",
+    "references": [
+      "Genesis 8:4"
+    ]
+  },
+  {
+    "term": "Babel",
+    "category": "place",
+    "definition": "First mention: GEN 10:10 (settlement; modern: Babylon)",
+    "references": [
+      "Genesis 10:10",
+      "Genesis 11:9"
+    ]
+  },
+  {
+    "term": "Erech",
+    "category": "place",
+    "definition": "First mention: GEN 10:10 (settlement; modern: Uruk)",
+    "references": [
+      "Genesis 10:10"
+    ]
+  },
+  {
+    "term": "Accad",
+    "category": "place",
+    "definition": "Only mentioned in GEN 10:10 (settlement; modern: uncertain, Tell Sheshubar?)",
+    "references": [
+      "Genesis 10:10"
+    ]
+  },
+  {
+    "term": "Calneh",
+    "category": "place",
+    "definition": "First mention: GEN 10:10 (settlement; modern: Nippur)",
+    "references": [
+      "Genesis 10:10"
+    ]
+  },
+  {
+    "term": "Shinar",
+    "category": "place",
+    "definition": "First mention: GEN 10:10 (geographic region; modern: Babylonia)",
+    "references": [
+      "Genesis 10:10",
+      "Genesis 11:2",
+      "Genesis 14:1",
+      "Genesis 14:9"
     ]
   },
   {
     "term": "Nineveh",
     "category": "place",
-    "definition": "The capital of the ancient Assyrian Empire. God sent the prophet Jonah to preach repentance there. The city repented, but later returned to wickedness and was destroyed as prophesied by Nahum.",
+    "definition": "First mention: GEN 10:11 (settlement; modern: Nineveh)",
     "references": [
-      "Jonah 1:2",
-      "Jonah 3:5",
-      "Nahum 1:1",
-      "Nahum 3:7"
+      "Genesis 10:11",
+      "Genesis 10:12"
     ]
   },
   {
-    "term": "Rome",
+    "term": "Rehoboth-Ir",
     "category": "place",
-    "definition": "Capital of the Roman Empire, which ruled the known world during Jesus' time. Paul was imprisoned and eventually martyred there. He wrote his letter to the Romans addressing the church in this city.",
+    "definition": "First mention: GEN 10:11 (settlement; modern: location in Nineveh)",
     "references": [
-      "Acts 28:16",
-      "Romans 1:7",
-      "2 Timothy 1:17",
-      "Revelation 17:9"
+      "Genesis 10:11"
     ]
   },
   {
-    "term": "Bethany",
+    "term": "Calah",
     "category": "place",
-    "definition": "A village on the eastern slope of the Mount of Olives, about 2 miles from Jerusalem. Home of Mary, Martha, and Lazarus, whom Jesus raised from the dead.",
+    "definition": "First mention: GEN 10:11 (settlement; modern: Nimrud)",
     "references": [
-      "John 11:1",
-      "John 11:43-44",
-      "Mark 11:11",
-      "Luke 24:50"
+      "Genesis 10:11",
+      "Genesis 10:12"
     ]
   },
   {
-    "term": "Gethsemane",
+    "term": "Resen",
     "category": "place",
-    "definition": "A garden at the foot of the Mount of Olives where Jesus prayed in agony before his arrest. The name means 'oil press,' reflecting its location among olive trees.",
+    "definition": "First mention: GEN 10:11 (settlement; modern: Qaryat as Salamiyah)",
     "references": [
-      "Matthew 26:36",
-      "Mark 14:32",
-      "Luke 22:44",
-      "John 18:1"
+      "Genesis 10:12"
+    ]
+  },
+  {
+    "term": "Sidon",
+    "category": "place",
+    "definition": "First mention: GEN 10:19 (settlement; modern: Sandikli archaeological site in Sidon)",
+    "references": [
+      "Genesis 10:19",
+      "Genesis 49:13"
+    ]
+  },
+  {
+    "term": "Gerar",
+    "category": "place",
+    "definition": "First mention: GEN 10:19 (settlement; modern: Tel Haror)",
+    "references": [
+      "Genesis 10:19",
+      "Genesis 20:1",
+      "Genesis 20:2",
+      "Genesis 21:32",
+      "Genesis 21:34"
+    ]
+  },
+  {
+    "term": "Gaza",
+    "category": "place",
+    "definition": "First mention: GEN 10:19 (settlement; modern: Tel Harube)",
+    "references": [
+      "Genesis 10:19"
+    ]
+  },
+  {
+    "term": "Sodom",
+    "category": "place",
+    "definition": "First mention: GEN 10:19 (settlement; modern: in the valley south of the Lisan peninsula)",
+    "references": [
+      "Genesis 10:19",
+      "Genesis 13:10",
+      "Genesis 13:12",
+      "Genesis 13:13",
+      "Genesis 14:2"
+    ]
+  },
+  {
+    "term": "Gomorrah",
+    "category": "place",
+    "definition": "First mention: GEN 10:19 (settlement; modern: in the valley south of the Lisan peninsula)",
+    "references": [
+      "Genesis 10:19",
+      "Genesis 13:10",
+      "Genesis 14:2",
+      "Genesis 14:8",
+      "Genesis 14:10"
+    ]
+  },
+  {
+    "term": "Admah",
+    "category": "place",
+    "definition": "First mention: GEN 10:19 (settlement; modern: in the valley south of the Lisan peninsula)",
+    "references": [
+      "Genesis 10:19",
+      "Genesis 14:2",
+      "Genesis 14:8"
+    ]
+  },
+  {
+    "term": "Zeboiim",
+    "category": "place",
+    "definition": "First mention: GEN 10:19 (settlement; modern: region south of the Lisan peninsula)",
+    "references": [
+      "Genesis 10:19",
+      "Genesis 14:2",
+      "Genesis 14:8"
+    ]
+  },
+  {
+    "term": "Lasha",
+    "category": "place",
+    "definition": "First mention: GEN 10:19 (settlement; modern: Callirrhoe)",
+    "references": [
+      "Genesis 10:19"
+    ]
+  },
+  {
+    "term": "Mesha",
+    "category": "place",
+    "definition": "First mention: GEN 10:30 (region or settlement; modern: Massa)",
+    "references": [
+      "Genesis 10:30"
+    ]
+  },
+  {
+    "term": "Sephar",
+    "category": "place",
+    "definition": "First mention: GEN 10:30 (settlement; modern: Zafar)",
+    "references": [
+      "Genesis 10:30"
+    ]
+  },
+  {
+    "term": "Ur",
+    "category": "place",
+    "definition": "First mention: GEN 11:28 (settlement; modern: Tell el Muqayyar)",
+    "references": [
+      "Genesis 11:28",
+      "Genesis 11:31",
+      "Genesis 15:7"
+    ]
+  },
+  {
+    "term": "Chaldea",
+    "category": "place",
+    "definition": "First mention: GEN 11:28 (geographic region; modern: region of Iraq from Baghdad to Kuwait)",
+    "references": [
+      "Genesis 11:28",
+      "Genesis 11:31",
+      "Genesis 15:7"
+    ]
+  },
+  {
+    "term": "Canaan",
+    "category": "place",
+    "definition": "First mention: GEN 11:31 (geographic region; modern: coastal region of northern Israel into Lebanon)",
+    "references": [
+      "Genesis 11:31",
+      "Genesis 12:5",
+      "Genesis 13:12",
+      "Genesis 16:3",
+      "Genesis 17:8"
+    ]
+  },
+  {
+    "term": "Haran",
+    "category": "place",
+    "definition": "First mention: GEN 11:31 (settlement; modern: Harran)",
+    "references": [
+      "Genesis 11:31",
+      "Genesis 11:32",
+      "Genesis 12:4",
+      "Genesis 12:5",
+      "Genesis 27:43"
+    ]
+  },
+  {
+    "term": "Shechem",
+    "category": "place",
+    "definition": "First mention: GEN 12:6 (settlement; modern: Tell Balatah)",
+    "references": [
+      "Genesis 12:6",
+      "Genesis 33:18",
+      "Genesis 35:4",
+      "Genesis 37:12",
+      "Genesis 37:13"
+    ]
+  },
+  {
+    "term": "Moreh",
+    "category": "place",
+    "definition": "First mention: GEN 12:6 (tree; modern: within 1km of Tell Balatah)",
+    "references": [
+      "Genesis 12:6"
+    ]
+  },
+  {
+    "term": "Bethel",
+    "category": "place",
+    "definition": "First mention: GEN 12:8 (settlement; modern: Beitin)",
+    "references": [
+      "Genesis 12:8",
+      "Genesis 13:3",
+      "Genesis 28:19",
+      "Genesis 31:13",
+      "Genesis 35:1"
+    ]
+  },
+  {
+    "term": "Ai",
+    "category": "place",
+    "definition": "First mention: GEN 12:8 (settlement; modern: Et Tell)",
+    "references": [
+      "Genesis 12:8",
+      "Genesis 13:3"
+    ]
+  },
+  {
+    "term": "Negev",
+    "category": "place",
+    "definition": "First mention: GEN 12:9 (geographic region; modern: Southern Israel- Negev desert)",
+    "references": [
+      "Genesis 12:9",
+      "Genesis 13:1",
+      "Genesis 13:3",
+      "Genesis 20:1",
+      "Genesis 24:62"
+    ]
+  },
+  {
+    "term": "Egypt",
+    "category": "place",
+    "definition": "First mention: GEN 12:10 (geographic region; modern: Egypt)",
+    "references": [
+      "Genesis 12:10",
+      "Genesis 12:11",
+      "Genesis 12:14",
+      "Genesis 13:1",
+      "Genesis 13:10"
+    ]
+  },
+  {
+    "term": "Valley of the Jordan",
+    "category": "place",
+    "definition": "First mention: GEN 13:10 (valley; modern: Jordan river valley)",
+    "references": [
+      "Genesis 13:10",
+      "Genesis 13:11"
+    ]
+  },
+  {
+    "term": "Jordan",
+    "category": "place",
+    "definition": "First mention: GEN 13:10 in the context of the Jordan valley (river; modern: Jordan river)",
+    "references": [
+      "Genesis 32:10",
+      "Genesis 50:10",
+      "Genesis 50:11"
+    ]
+  },
+  {
+    "term": "Zoar",
+    "category": "place",
+    "definition": "First mention: GEN 13:10 (settlement; modern: uncertain, Al Safi?)",
+    "references": [
+      "Genesis 13:10",
+      "Genesis 14:2",
+      "Genesis 14:8",
+      "Genesis 19:22",
+      "Genesis 19:23"
+    ]
+  },
+  {
+    "term": "Mamre",
+    "category": "place",
+    "definition": "First mention: GEN 13:18 (settlement; modern: Ramat el Khalil)",
+    "references": [
+      "Genesis 13:18",
+      "Genesis 14:13",
+      "Genesis 18:1",
+      "Genesis 23:17",
+      "Genesis 23:19"
+    ]
+  },
+  {
+    "term": "Hebron",
+    "category": "place",
+    "definition": "First mention: GEN 13:18 (settlement; modern: Tel Rumeida)",
+    "references": [
+      "Genesis 13:18",
+      "Genesis 23:2",
+      "Genesis 23:19",
+      "Genesis 35:27"
+    ]
+  },
+  {
+    "term": "Elam",
+    "category": "place",
+    "definition": "First mention: GEN 14:1. Susa was the onetime capital (openbible.info) (geographic region; modern: Southern Iran near the Persian Gulf)",
+    "references": [
+      "Genesis 14:1",
+      "Genesis 14:9"
+    ]
+  },
+  {
+    "term": "Valley of Siddim",
+    "category": "place",
+    "definition": "First mention: GEN 14:3 (geographic region; modern: valley south of the Dead Sea)",
+    "references": [
+      "Genesis 14:3",
+      "Genesis 14:8",
+      "Genesis 14:10"
+    ]
+  },
+  {
+    "term": "Salt Sea",
+    "category": "place",
+    "definition": "First mention: GEN 14:3 (body of water; modern: Dead Sea)",
+    "references": [
+      "Genesis 14:3"
+    ]
+  },
+  {
+    "term": "Ashteroth-karnaim",
+    "category": "place",
+    "definition": "First mention: GEN 14:5 (settlement; modern: Tell Ashtara)",
+    "references": [
+      "Genesis 14:5"
+    ]
+  },
+  {
+    "term": "Ham",
+    "category": "place",
+    "definition": "First mention: GEN 14:5 (settlement; modern: Tell Ham)",
+    "references": [
+      "Genesis 14:5"
+    ]
+  },
+  {
+    "term": "Shaveh-kiriathaim",
+    "category": "place",
+    "definition": "First mention: GEN 14:5 (geographic region; modern: near Khirbet al Mukhayyat)",
+    "references": [
+      "Genesis 14:5"
+    ]
+  },
+  {
+    "term": "Mount Seir",
+    "category": "place",
+    "definition": "First mention: GEN 14:6 (mountain; modern: region around Jebel esh Shera)",
+    "references": [
+      "Genesis 14:6",
+      "Genesis 25:18",
+      "Genesis 32:3",
+      "Genesis 33:14",
+      "Genesis 33:16"
+    ]
+  },
+  {
+    "term": "El-paran",
+    "category": "place",
+    "definition": "First mention: GEN 14:6 (settlement; modern: Aqaba)",
+    "references": [
+      "Genesis 14:6"
+    ]
+  },
+  {
+    "term": "Kadesh",
+    "category": "place",
+    "definition": "First mention: GEN 14:7 (settlement; modern: Ain el Qudeirat)",
+    "references": [
+      "Genesis 14:7",
+      "Genesis 16:14",
+      "Genesis 20:1"
+    ]
+  },
+  {
+    "term": "Hazazon-tamar",
+    "category": "place",
+    "definition": "First mention: GEN 14:7 (settlement; modern: En Hazeva)",
+    "references": [
+      "Genesis 14:7"
+    ]
+  },
+  {
+    "term": "Dan",
+    "category": "place",
+    "definition": "First mention: GEN 14:14 (settlement; modern: Tel Dan)",
+    "references": [
+      "Genesis 14:14"
+    ]
+  },
+  {
+    "term": "Hobah",
+    "category": "place",
+    "definition": "First mention: GEN 14:15 (settlement; modern: Hoba or possibly Upu)",
+    "references": [
+      "Genesis 14:15"
+    ]
+  },
+  {
+    "term": "Damascus",
+    "category": "place",
+    "definition": "First mention: GEN 14:15 (settlement; modern: Damascus)",
+    "references": [
+      "Genesis 14:15",
+      "Genesis 15:2"
+    ]
+  },
+  {
+    "term": "King's Valley",
+    "category": "place",
+    "definition": "First mention: GEN 14:17 (valley; modern: intersection of Kidron Valley and Valley of Hinnom)",
+    "references": [
+      "Genesis 14:17"
+    ]
+  },
+  {
+    "term": "Jerusalem",
+    "category": "place",
+    "definition": "First mention: GEN 14:18 (settlement; modern: Jerusalem)",
+    "references": [
+      "Genesis 14:18"
+    ]
+  },
+  {
+    "term": "Nile",
+    "category": "place",
+    "definition": "First mention: GEN 15:18 (river; modern: Nile River)",
+    "references": [
+      "Genesis 15:18",
+      "Genesis 41:1",
+      "Genesis 41:2",
+      "Genesis 41:3",
+      "Genesis 41:17"
+    ]
+  },
+  {
+    "term": "Shur",
+    "category": "place",
+    "definition": "First mention: GEN 16:7 (settlement; modern: Ar Ruwaysat)",
+    "references": [
+      "Genesis 16:7",
+      "Genesis 20:1"
+    ]
+  },
+  {
+    "term": "Beer-lahai-roi",
+    "category": "place",
+    "definition": "First mention: GEN 16:14 (well; modern: Ain Muweileh or possibly Haluza)",
+    "references": [
+      "Genesis 16:14",
+      "Genesis 24:62",
+      "Genesis 25:11"
+    ]
+  },
+  {
+    "term": "Bered",
+    "category": "place",
+    "definition": "First mention: GEN 16:14 (settlement; modern: Haluza)",
+    "references": [
+      "Genesis 16:14"
+    ]
+  },
+  {
+    "term": "Beersheba",
+    "category": "place",
+    "definition": "First mention: GEN 21:14 (settlement; modern: Tel Beer Sheva (near Bir es Seba))",
+    "references": [
+      "Genesis 21:14",
+      "Genesis 21:31",
+      "Genesis 21:32",
+      "Genesis 21:33",
+      "Genesis 22:19"
+    ]
+  },
+  {
+    "term": "Paran",
+    "category": "place",
+    "definition": "First mention: GEN 21:21 (region; modern: Paran)",
+    "references": [
+      "Genesis 21:21"
+    ]
+  },
+  {
+    "term": "Moriah",
+    "category": "place",
+    "definition": "First mention: GEN 22:2 (region; modern: Moriah)",
+    "references": [
+      "Genesis 22:2"
+    ]
+  },
+  {
+    "term": "The LORD Will Provide",
+    "category": "place",
+    "definition": "First mention: GEN 22:14 (unique; modern: Mount Moriah?)",
+    "references": [
+      "Genesis 22:14"
+    ]
+  },
+  {
+    "term": "Machpelah",
+    "category": "place",
+    "definition": "First mention: GEN 23:9.  Worth 400 shekels of silver (GEN 23:15) (unique; modern: Cave of the Patriarchs)",
+    "references": [
+      "Genesis 23:9",
+      "Genesis 23:17",
+      "Genesis 23:19",
+      "Genesis 25:9",
+      "Genesis 49:30"
+    ]
+  },
+  {
+    "term": "Mesopotamia",
+    "category": "place",
+    "definition": "First mention: GEN 24:10 (region; modern: Aram-naharaim)",
+    "references": [
+      "Genesis 24:10"
+    ]
+  },
+  {
+    "term": "Nahor",
+    "category": "place",
+    "definition": "First mention: GEN 24:10 (settlement; modern: Nahuru)",
+    "references": [
+      "Genesis 24:10"
+    ]
+  },
+  {
+    "term": "Land of the East",
+    "category": "place",
+    "definition": "First mention: GEN 25:6 (geographic region; modern: Amman)",
+    "references": [
+      "Genesis 25:6",
+      "Genesis 29:1"
+    ]
+  },
+  {
+    "term": "Paddan-aram",
+    "category": "place",
+    "definition": "First mention: GEN 25:20 (settlement; modern: in the region of Aram-naharaim)",
+    "references": [
+      "Genesis 25:20",
+      "Genesis 28:2",
+      "Genesis 28:5",
+      "Genesis 28:6",
+      "Genesis 28:7"
+    ]
+  },
+  {
+    "term": "Esek",
+    "category": "place",
+    "definition": "First mention: GEN 26:20 (well; modern: in the region between Gerar and Beersheba)",
+    "references": [
+      "Genesis 26:20"
+    ]
+  },
+  {
+    "term": "Sitnah",
+    "category": "place",
+    "definition": "First mention: GEN 26:21 (well; modern: within 15 km of Ruheibeh)",
+    "references": [
+      "Genesis 26:21"
+    ]
+  },
+  {
+    "term": "Rehoboth",
+    "category": "place",
+    "definition": "First mention: GEN 26:22 (well; modern: Ruheibeh)",
+    "references": [
+      "Genesis 26:22"
+    ]
+  },
+  {
+    "term": "Shiba",
+    "category": "place",
+    "definition": "First mention: GEN 26:33 (well; modern: Bir es Seba)",
+    "references": [
+      "Genesis 26:33"
+    ]
+  },
+  {
+    "term": "Gilead",
+    "category": "place",
+    "definition": "First mention: GEN 31:21 (geographic region; modern: hill country west-northwest of modern Amman and loosely associated with the Jabbok River)",
+    "references": [
+      "Genesis 31:21",
+      "Genesis 31:23",
+      "Genesis 31:25",
+      "Genesis 37:25"
+    ]
+  },
+  {
+    "term": "Mahanaim",
+    "category": "place",
+    "definition": "First mention: GEN 32:2 (settlement; modern: Tell edh Dhahab el Gharbi)",
+    "references": [
+      "Genesis 32:2"
+    ]
+  },
+  {
+    "term": "Edom",
+    "category": "place",
+    "definition": "First mention: GEN 32:3 (region; modern: A region between the Dead Sea and the Gulf of Aqaba)",
+    "references": [
+      "Genesis 32:3",
+      "Genesis 36:16",
+      "Genesis 36:17",
+      "Genesis 36:21",
+      "Genesis 36:31"
+    ]
+  },
+  {
+    "term": "Jabbok",
+    "category": "place",
+    "definition": "First mention: GEN 32:22 (river; modern: Zarqa River)",
+    "references": [
+      "Genesis 32:22"
+    ]
+  },
+  {
+    "term": "Peniel",
+    "category": "place",
+    "definition": "First mention: GEN 32:30 (settlement; modern: Tell edh Dhahab esh Sherqiyeh)",
+    "references": [
+      "Genesis 32:30",
+      "Genesis 32:31"
+    ]
+  },
+  {
+    "term": "Succoth",
+    "category": "place",
+    "definition": "First mention: GEN 33:17 (settlement; modern: Tell Deir Alla)",
+    "references": [
+      "Genesis 33:17"
+    ]
+  },
+  {
+    "term": "El-bethel",
+    "category": "place",
+    "definition": "First mention: GEN 35:7 (altar; modern: Possibly Beitin, Al Bira, or Burj Beitin)",
+    "references": [
+      "Genesis 35:7"
+    ]
+  },
+  {
+    "term": "Allon-bacuth",
+    "category": "place",
+    "definition": "First mention: GEN 35:8 (tree; modern: Possibly near Beitin, Al Bira, or Burj Beitin)",
+    "references": [
+      "Genesis 35:8"
+    ]
+  },
+  {
+    "term": "Bethlehem",
+    "category": "place",
+    "definition": "First mention: GEN 35:19 (settlement; modern: Bethlehem)",
+    "references": [
+      "Genesis 35:16",
+      "Genesis 35:19",
+      "Genesis 48:7"
+    ]
+  },
+  {
+    "term": "Migdal Eder",
+    "category": "place",
+    "definition": "First mention: GEN 35:21 (settlement; modern: Khirbet es Siyar el Ghanam)",
+    "references": [
+      "Genesis 35:21"
+    ]
+  },
+  {
+    "term": "Dinhabah",
+    "category": "place",
+    "definition": "First mention: GEN 36:32 (settlement; modern: Uncertain, possibly Khirbet el Muhatta or Dannea)",
+    "references": [
+      "Genesis 36:32"
+    ]
+  },
+  {
+    "term": "Bozrah",
+    "category": "place",
+    "definition": "First mention: GEN 36:33 (settlement; modern: Buseira)",
+    "references": [
+      "Genesis 36:33"
+    ]
+  },
+  {
+    "term": "Moab",
+    "category": "place",
+    "definition": "First mention: GEN 36:35 (region; modern: Area east of the Dead Sea)",
+    "references": [
+      "Genesis 36:35"
+    ]
+  },
+  {
+    "term": "Avith",
+    "category": "place",
+    "definition": "First mention: GEN 36:35 (settlement; modern: Possibly Rujum al Juththa)",
+    "references": [
+      "Genesis 36:35"
+    ]
+  },
+  {
+    "term": "Masrekah",
+    "category": "place",
+    "definition": "First mention: GEN 36:36 (settlement; modern: within 5 km of Jebel el Musraq (modern))",
+    "references": [
+      "Genesis 36:36"
+    ]
+  },
+  {
+    "term": "Pau",
+    "category": "place",
+    "definition": "First mention: GEN 36:39 (settlement; modern: Possibly along Wadi Fai)",
+    "references": [
+      "Genesis 36:39"
+    ]
+  },
+  {
+    "term": "Valley of Hebron",
+    "category": "place",
+    "definition": "First mention: GEN 37:14 (valley; modern: Valley of Hebron)",
+    "references": [
+      "Genesis 37:14"
+    ]
+  },
+  {
+    "term": "Dothan",
+    "category": "place",
+    "definition": "First mention: GEN 37:17 (settlement; modern: Tel Dothan)",
+    "references": [
+      "Genesis 37:17"
+    ]
+  },
+  {
+    "term": "Chezib",
+    "category": "place",
+    "definition": "First mention: GEN 38:5 (settlement; modern: Achzib)",
+    "references": [
+      "Genesis 38:5"
+    ]
+  },
+  {
+    "term": "Timnah",
+    "category": "place",
+    "definition": "First mention: GEN 38:12 (settlement; modern: within 15km of Tel Main)",
+    "references": [
+      "Genesis 38:12",
+      "Genesis 38:13",
+      "Genesis 38:14"
+    ]
+  },
+  {
+    "term": "Enaim",
+    "category": "place",
+    "definition": "First mention: GEN 38:14 (settlement; modern: near Khirbet Beit Ika)",
+    "references": [
+      "Genesis 38:14",
+      "Genesis 38:19"
+    ]
+  },
+  {
+    "term": "On",
+    "category": "place",
+    "definition": "First mention: GEN 41:45 (settlement; modern: Heliopolis)",
+    "references": [
+      "Genesis 41:45",
+      "Genesis 41:50",
+      "Genesis 46:20"
+    ]
+  },
+  {
+    "term": "Goshen",
+    "category": "place",
+    "definition": "First mention: GEN 45:10 (region; modern: Northern Egypt)",
+    "references": [
+      "Genesis 45:10",
+      "Genesis 46:28",
+      "Genesis 46:29",
+      "Genesis 46:34",
+      "Genesis 47:1"
+    ]
+  },
+  {
+    "term": "Rameses",
+    "category": "place",
+    "definition": "First mention: GEN 47:11 (settlement; modern: Qantir (or possibly Tell el Daba))",
+    "references": [
+      "Genesis 47:11",
+      "Exodus 1:11",
+      "Exodus 12:37"
+    ]
+  },
+  {
+    "term": "Shiloh",
+    "category": "place",
+    "definition": "First mention: GEN 49:10 (settlement; modern: Khirbet Seilun)",
+    "references": [
+      "Genesis 49:10"
+    ]
+  },
+  {
+    "term": "Atad",
+    "category": "place",
+    "definition": "First mention: GEN 50:10 (settlement; modern: near the mouth of the Jordan River)",
+    "references": [
+      "Genesis 50:10",
+      "Genesis 50:11"
+    ]
+  },
+  {
+    "term": "Pithom",
+    "category": "place",
+    "definition": "First and only mention: EXO 1:11 (settlement; modern: possibly Tell er Retaba or Tell el Maskhuta)",
+    "references": [
+      "Exodus 1:11"
+    ]
+  },
+  {
+    "term": "Midian",
+    "category": "place",
+    "definition": "First mention: EXO 2:15 (region; modern: East of the Gulf of Aqaba)",
+    "references": [
+      "Exodus 2:15",
+      "Exodus 2:16",
+      "Exodus 3:1",
+      "Exodus 4:19"
+    ]
+  },
+  {
+    "term": "Horeb",
+    "category": "place",
+    "definition": "First mention: EXO 3:1 (mountain; modern: Jabal al Lawz)",
+    "references": [
+      "Exodus 3:1",
+      "Exodus 4:27"
+    ]
+  },
+  {
+    "term": "Red Sea",
+    "category": "place",
+    "definition": "First mention: EXO 10:19 (body of water; modern: Gulf of Aqaba)",
+    "references": [
+      "Exodus 10:19",
+      "Exodus 13:18"
+    ]
+  },
+  {
+    "term": "Etham",
+    "category": "place",
+    "definition": "First mention: EXO 13:20 (settlement; modern: possibly Ismailia)",
+    "references": [
+      "Exodus 13:20"
     ]
   }
 ]
