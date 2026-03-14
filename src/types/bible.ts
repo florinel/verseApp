@@ -47,6 +47,8 @@ export interface DictionaryCandidateFeatures {
   exactTermMatch: number;
   exactReferencePrior: number;
   contextDefinitionOverlap: number;
+  storyContextOverlap: number;
+  interactionDefinitionOverlap: number;
   referenceSupport: number;
   bookReferencePrior: number;
   categoryPrior: number;

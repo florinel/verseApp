@@ -52,6 +52,8 @@ function activeWeights(): Record<keyof DictionaryCandidateFeatures, number> {
     exactTermMatch: learned.exactTermMatch ?? DISAMBIGUATION_WEIGHTS.exactTermMatch,
     exactReferencePrior: learned.exactReferencePrior ?? DISAMBIGUATION_WEIGHTS.exactReferencePrior,
     contextDefinitionOverlap: learned.contextDefinitionOverlap ?? DISAMBIGUATION_WEIGHTS.contextDefinitionOverlap,
+    storyContextOverlap: learned.storyContextOverlap ?? DISAMBIGUATION_WEIGHTS.storyContextOverlap,
+    interactionDefinitionOverlap: learned.interactionDefinitionOverlap ?? DISAMBIGUATION_WEIGHTS.interactionDefinitionOverlap,
     referenceSupport: learned.referenceSupport ?? DISAMBIGUATION_WEIGHTS.referenceSupport,
     bookReferencePrior: learned.bookReferencePrior ?? DISAMBIGUATION_WEIGHTS.bookReferencePrior,
     categoryPrior: learned.categoryPrior ?? DISAMBIGUATION_WEIGHTS.categoryPrior,
@@ -73,6 +75,12 @@ function tokenize(text: string): string[] {
 
 function uniqueTokens(text: string): Set<string> {
   return new Set(tokenize(text));
+}
+
+function extractInteractionTerms(text: string): Set<string> {
+  const matches = text.match(/\b[A-Z][a-z]{2,}\b/g) ?? [];
+  const stop = new Set(['The', 'And', 'But', 'Then', 'For', 'Now', 'That', 'With', 'From']);
+  return new Set(matches.filter(m => !stop.has(m)).map(m => m.toLowerCase()));
 }
 
 function overlapRatio(a: Set<string>, b: Set<string>): number {
@@ -123,6 +131,20 @@ function queryDefinitionOverlap(entry: DictionaryEntry, queryText?: string): num
   return overlapRatio(q, def);
 }
 
+function storyContextOverlap(entry: DictionaryEntry, storyContextText?: string): number {
+  if (!storyContextText?.trim()) return 0;
+  const storyTokens = uniqueTokens(storyContextText);
+  const defTokens = uniqueTokens(entry.definition);
+  return overlapRatio(storyTokens, defTokens);
+}
+
+function interactionDefinitionOverlap(entry: DictionaryEntry, contextText: string, storyContextText?: string): number {
+  const interactionTerms = extractInteractionTerms(`${contextText} ${storyContextText ?? ''}`);
+  if (interactionTerms.size === 0) return 0;
+  const defTokens = uniqueTokens(entry.definition);
+  return overlapRatio(interactionTerms, defTokens);
+}
+
 function candidateFeatures(
   entry: DictionaryEntry,
   term: string,
@@ -130,6 +152,7 @@ function candidateFeatures(
   currentBook?: string,
   currentChapter?: number,
   currentVerse?: number,
+  storyContextText?: string,
   queryText?: string,
 ): DictionaryCandidateFeatures {
   const normalizedTerm = term.toLowerCase();
@@ -140,6 +163,8 @@ function candidateFeatures(
     exactTermMatch,
     exactReferencePrior: exactReferencePrior(entry, currentBook, currentChapter, currentVerse),
     contextDefinitionOverlap: overlapRatio(contextTokens, defTokens),
+    storyContextOverlap: storyContextOverlap(entry, storyContextText),
+    interactionDefinitionOverlap: interactionDefinitionOverlap(entry, contextText, storyContextText),
     referenceSupport: referenceSupportScore(entry),
     bookReferencePrior: bookReferencePrior(entry, currentBook),
     categoryPrior: DISAMBIGUATION_CATEGORY_PRIOR[entry.category],
@@ -169,6 +194,7 @@ interface RankDictionaryCandidatesInput {
   term: string;
   entries: DictionaryEntry[];
   contextText: string;
+  storyContextText?: string;
   currentBook?: string;
   currentChapter?: number;
   currentVerse?: number;
@@ -180,6 +206,7 @@ export function rankDictionaryCandidates({
   term,
   entries,
   contextText,
+  storyContextText,
   currentBook,
   currentChapter,
   currentVerse,
@@ -194,7 +221,16 @@ export function rankDictionaryCandidates({
 
   const ranked = candidatesPool
     .map(entry => {
-      const features = candidateFeatures(entry, term, contextText, currentBook, currentChapter, currentVerse, queryText);
+      const features = candidateFeatures(
+        entry,
+        term,
+        contextText,
+        currentBook,
+        currentChapter,
+        currentVerse,
+        storyContextText,
+        queryText,
+      );
       return {
         entry,
         features,

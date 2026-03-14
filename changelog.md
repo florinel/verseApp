@@ -352,3 +352,94 @@ It records detected file additions, changes, and removals inside this repository
 - `src/components/DictionaryBrowser.test.tsx` — Updated React component test in ui layer
   - Last commit touching this path: testing, search updates
 
+## 2026-03-14 01:58:03 UTC
+
+### Changed
+- `src/types/bible.ts` — Updated shared type definition in shared typing
+  - Last commit touching this path: added ML logic and corpus
+
+## 2026-03-14 01:58:08 UTC
+
+### Changed
+- `src/config/disambiguation.ts` — Updated application source file in project root
+  - Last commit touching this path: added ML logic and corpus
+
+## 2026-03-14 01:58:43 UTC
+
+### Changed
+- `src/utils/disambiguate.ts` — Updated application source file in project root
+  - Last commit touching this path: added ML logic and corpus
+
+## 2026-03-14 01:58:48 UTC
+
+### Changed
+- `src/hooks/useDictionary.ts` — Updated custom hook in data/loading logic
+  - Last commit touching this path: added ML logic and corpus
+
+## 2026-03-14 01:58:53 UTC
+
+### Changed
+- `src/components/VerseDisplay.tsx` — Updated React component in ui layer
+  - Last commit touching this path: added ML logic and corpus
+
+## 2026-03-14 02:03:13 UTC
+
+### Changed
+- `src/components/VerseDisplay.tsx` — Updated React component in ui layer
+  - Last commit touching this path: added ML logic and corpus
+- `src/config/disambiguation.ts` — Updated application source file in project root
+  - Last commit touching this path: added ML logic and corpus
+- `src/hooks/useDictionary.ts` — Updated custom hook in data/loading logic
+  - Last commit touching this path: added ML logic and corpus
+- `src/types/bible.ts` — Updated shared type definition in shared typing
+  - Last commit touching this path: added ML logic and corpus
+- `src/utils/disambiguate.ts` — Updated application source file in project root
+  - Last commit touching this path: added ML logic and corpus
+
+## 2026-03-14 02:03:22 UTC
+
+### Changed
+- `scripts/build-disambiguation-dataset.mjs` — Updated automation script in project automation
+  - Last commit touching this path: added ML logic and corpus
+
+## 2026-03-14 02:04:57 UTC
+
+### Added
+- `scripts/apply-contextual-disambiguation-upgrade.sh` — Added automation script in project automation
+
+## 2026-03-14 02:04:59 UTC
+
+### Changed
+- `scripts/apply-contextual-disambiguation-upgrade.sh` — Updated automation script in project automation
+
+## 2026-03-14 02:05:10 UTC
+
+### Changed
+- `scripts/apply-contextual-disambiguation-upgrade.sh` — Updated automation script in project automation
+
+## 2026-03-14 02:08:07 UTC
+
+### Changed
+- `scripts/build-disambiguation-dataset.mjs` — Updated automation script in project automation
+  - Last commit touching this path: added ML logic and corpus
+- `scripts/train-disambiguation-model.mjs` — Updated automation script in project automation
+  - Last commit touching this path: added ML logic and corpus
+
+## 2026-03-14 02:08:18 UTC
+
+### Changed
+- `public/data/disambiguation/training-dataset.json` — Updated JSON data/config file in static content
+  - Last commit touching this path: fixes
+
+## 2026-03-14 02:08:21 UTC
+
+### Changed
+- `public/data/disambiguation/model.json` — Updated JSON data/config file in static content
+  - Last commit touching this path: added ML logic and corpus
+
+## 2026-03-14 02:09:11 UTC
+
+### Changed
+- `scripts/build-disambiguation-dataset.mjs` — Updated automation script in project automation
+  - Last commit touching this path: added ML logic and corpus
+

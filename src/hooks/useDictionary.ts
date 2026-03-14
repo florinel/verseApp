@@ -113,11 +113,13 @@ export function useDictionary() {
     currentBook?: string,
     currentChapter?: number,
     currentVerse?: number,
+    storyContextText?: string,
   ): DictionaryCandidate[] => {
     return rankDictionaryCandidates({
       term,
       entries,
       contextText,
+      storyContextText,
       currentBook,
       currentChapter,
       currentVerse,
@@ -131,8 +133,9 @@ export function useDictionary() {
     currentBook?: string,
     currentChapter?: number,
     currentVerse?: number,
+    storyContextText?: string,
   ): DictionaryEntry | undefined => {
-    const candidates = getCandidates(term, contextText, currentBook, currentChapter, currentVerse);
+    const candidates = getCandidates(term, contextText, currentBook, currentChapter, currentVerse, storyContextText);
     return candidates[0]?.entry;
   }, [getCandidates]);
 

@@ -39,7 +39,7 @@ export function VerseDisplay() {
     return new RegExp(`\\b(${escaped.join('|')})\\b`, 'gi');
   }, [entries]);
 
-  const renderVerseText = useCallback((text: string, verseNumber: number): ReactNode => {
+  const renderVerseText = useCallback((text: string, verseNumber: number, storyContextText: string): ReactNode => {
     if (!termRegex) return text;
 
     const parts: Array<{ text: string; isTerm: boolean }> = [];
@@ -63,7 +63,7 @@ export function VerseDisplay() {
 
     return parts.map((part, i) => {
       if (!part.isTerm) return <Fragment key={i}>{part.text}</Fragment>;
-      const candidates = getCandidates(part.text, text, currentBook, currentChapter, verseNumber);
+      const candidates = getCandidates(part.text, text, currentBook, currentChapter, verseNumber, storyContextText);
       const topCandidate = candidates[0];
       const fallbackEntry = lookup(part.text);
       const useRankedEntry = topCandidate && (candidates.length === 1 || topCandidate.confidence >= DISAMBIGUATION_MIN_CONFIDENCE);
@@ -123,6 +123,10 @@ export function VerseDisplay() {
       <div className={`columns-2 gap-8 pt-16 ${fontSerif ? 'font-serif' : 'font-sans'} ${FONT_SIZE_CLASS[fontSize]} leading-relaxed`}>
         {chapter.verses.map(v => {
           const isSelected = selectedVerse === v.verse;
+          const storyContextText = chapter.verses
+            .filter(cv => Math.abs(cv.verse - v.verse) <= 2)
+            .map(cv => cv.text)
+            .join(' ');
           return (
             <span
               key={v.verse}
@@ -134,7 +138,7 @@ export function VerseDisplay() {
                 }`}
             >
               <sup className="text-[10px] font-sans font-bold text-amber-700 dark:text-amber-400 align-super mr-0.5 select-none">{v.verse}</sup>
-              <span className="text-gray-800 dark:text-gray-200">{renderVerseText(v.text, v.verse)}</span>
+              <span className="text-gray-800 dark:text-gray-200">{renderVerseText(v.text, v.verse, storyContextText)}</span>
               {/* Action bar appears when verse is selected */}
               {isSelected && (
                 <span

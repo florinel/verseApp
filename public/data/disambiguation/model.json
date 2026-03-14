@@ -1,19 +1,25 @@
 {
-  "version": "logreg-v1",
-  "trainedAt": "2026-03-14T01:39:50.084Z",
+  "version": "logreg-v2-contextual",
+  "trainedAt": "2026-03-14T02:08:20.561Z",
   "featureWeights": {
-    "exactTermMatch": -0.5305579226357207,
-    "exactReferencePrior": 1.4562253122711044,
-    "contextDefinitionOverlap": -0.03998101480578429,
-    "referenceSupport": 0.1348847799736278,
-    "bookReferencePrior": 0.2529286622998762,
-    "categoryPrior": -0.36865314325537013,
+    "exactTermMatch": -0.8992979808818973,
+    "exactReferencePrior": 2.3498318958230744,
+    "contextDefinitionOverlap": -0.0833530446913967,
+    "storyContextOverlap": -0.030678621516288147,
+    "interactionDefinitionOverlap": 0.0023757666470039635,
+    "referenceSupport": 0.3866238612595467,
+    "bookReferencePrior": 0.32399797719723394,
+    "categoryPrior": -0.5326768045572423,
     "queryDefinitionOverlap": 0
   },
-  "intercept": -0.5378241806059144,
+  "intercept": -0.9321253182419027,
   "metrics": {
-    "samples": 13910,
-    "accuracy": 0.7239,
-    "loss": 0.566822
+    "samples": 13928,
+    "trainSamples": 11839,
+    "validationSamples": 2089,
+    "trainAccuracy": 0.7258,
+    "validationAccuracy": 0.7157,
+    "trainLoss": 0.528761,
+    "validationLoss": 0.53202
   }
 }
