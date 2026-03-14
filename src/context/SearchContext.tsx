@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useCallback, useRef, type ReactNode } from 'react';
 import { SearchResult, Translation, DictionaryEntry } from '../types/bible';
 import { BIBLE_BOOKS, bookFileName } from '../bibleBooks';
+import { scoreDictionaryEntryForQuery } from '../utils/disambiguate';
 
 function parseReference(input: string): { bookName: string; chapter: number; verse?: number } | null {
   const trimmed = input.trim();
@@ -99,7 +100,12 @@ export function SearchProvider({ children }: { children: ReactNode }) {
         e.term.toLowerCase().includes(lq) ||
         e.definition.toLowerCase().includes(lq)
       );
-      if (!abortRef.current) setDictResults(matchedDict);
+      const rankedDict = [...matchedDict].sort((a, b) => {
+        const scoreDiff = scoreDictionaryEntryForQuery(b, lq) - scoreDictionaryEntryForQuery(a, lq);
+        if (scoreDiff !== 0) return scoreDiff;
+        return a.term.localeCompare(b.term);
+      });
+      if (!abortRef.current) setDictResults(rankedDict);
     } catch { /* ignore */ }
 
     // 3. Keyword search across all books (whole-word matching)

@@ -7,6 +7,7 @@ import { useSearch } from '../context/SearchContext';
 import { BookmarkButton } from './BookmarkButton';
 import { CopyButton } from './CopyButton';
 import { DictionaryPopover } from './DictionaryPopover';
+import { DISAMBIGUATION_MIN_CONFIDENCE } from '../config/disambiguation';
 
 const FONT_SIZE_CLASS = {
   xs: 'text-xs',
@@ -20,7 +21,7 @@ export function VerseDisplay() {
   const { currentBook, currentChapter, currentTranslation, nextChapter, prevChapter, totalChapters, setViewMode } = useBible();
   const { fontSerif, fontSize } = useTheme();
   const { data, loading, error } = useBibleData(currentBook, currentTranslation);
-  const { entries, isKnownTerm, lookup } = useDictionary();
+  const { entries, lookup, getCandidates } = useDictionary();
   const { search } = useSearch();
   const [selectedVerse, setSelectedVerse] = useState<number | null>(null);
 
@@ -62,15 +63,25 @@ export function VerseDisplay() {
 
     return parts.map((part, i) => {
       if (!part.isTerm) return <Fragment key={i}>{part.text}</Fragment>;
-      const entry = lookup(part.text);
+      const candidates = getCandidates(part.text, text, currentBook);
+      const topCandidate = candidates[0];
+      const fallbackEntry = lookup(part.text);
+      const useRankedEntry = topCandidate && (candidates.length === 1 || topCandidate.confidence >= DISAMBIGUATION_MIN_CONFIDENCE);
+      const entry = useRankedEntry ? topCandidate.entry : (fallbackEntry ?? topCandidate?.entry);
       if (!entry) return <Fragment key={i}>{part.text}</Fragment>;
       return (
-        <DictionaryPopover key={i} entry={entry} onSearch={handleDictSearch}>
+        <DictionaryPopover
+          key={i}
+          entry={entry}
+          candidates={candidates}
+          confidence={topCandidate?.confidence}
+          onSearch={handleDictSearch}
+        >
           {part.text}
         </DictionaryPopover>
       );
     });
-  }, [termRegex, lookup, isKnownTerm]);
+  }, [termRegex, getCandidates, currentBook, lookup, handleDictSearch]);
 
   if (loading) {
     return (

@@ -207,6 +207,20 @@ describe('VerseDisplay', () => {
       searchEntries: () => [mockDictEntry],
       isKnownTerm: (word: string) => word.toLowerCase() === 'god',
       getByCategory: () => [mockDictEntry],
+      getCandidates: () => [{
+        entry: mockDictEntry,
+        score: 1,
+        confidence: 1,
+        features: {
+          exactTermMatch: 1,
+          contextDefinitionOverlap: 1,
+          referenceSupport: 0,
+          bookReferencePrior: 0,
+          categoryPrior: 1,
+          queryDefinitionOverlap: 0,
+        },
+      }],
+      resolveBestCandidate: () => mockDictEntry,
     });
     global.fetch = vi.fn().mockImplementation((url: string) => {
       return Promise.resolve({ ok: true, json: () => Promise.resolve(mockBookData) });

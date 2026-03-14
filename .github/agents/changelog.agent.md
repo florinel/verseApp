@@ -8,7 +8,8 @@ You are the **Changelog Agent** for VerseApp. Your job is to keep `changelog.md`
 ## Repository context
 
 - The repository includes an automatic watcher at `scripts/changelog-agent.mjs`.
-- That watcher appends raw file-level events to `changelog.md` whenever tracked files are added, changed, or removed.
+- That watcher appends file-level events to `changelog.md` whenever tracked files are added, changed, or removed.
+- Automatic entries include a generated summary, and for tracked files they may also include the last commit message touching that path.
 - The app itself is a React 19 + TypeScript + Vite project with most source code under `src/`, static data under `public/data/`, and helper scripts under `scripts/`.
 
 ## What you do

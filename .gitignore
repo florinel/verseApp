@@ -4,11 +4,29 @@ node_modules
 # Build output
 dist
 dist-ssr
+*.tsbuildinfo
 
 # Environment
 .env
+.env.*
 .env.local
 .env.*.local
+!.env.example
+!.env.*.example
+.envrc
+.direnv/
+
+# Secrets / local credentials
+secrets/
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+*.asc
+.npmrc
+.yarnrc.yml
 
 # Editor / IDE
 .vscode/*
@@ -27,6 +45,9 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# Local scratch files
+.copilot-changelog-probe*
 
 # CSV data (large, generated/sourced externally)
 public/data/csv/

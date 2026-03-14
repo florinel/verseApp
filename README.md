@@ -13,6 +13,7 @@ A modern Bible study application built with React 19 and TypeScript. Read script
 - **Settings** — Configurable font family (serif/sans-serif), font size (5 levels), and dark/light theme
 - **Dark Mode** — Automatic detection of system preference with manual toggle
 - **Keyboard Friendly** — Press Enter to search, debounced input for responsive filtering
+- **Well-Tested Core** — Component, context, and hook coverage across reading, search, dictionary, bookmarks, and settings flows
 
 ## Tech Stack
 
@@ -89,6 +90,22 @@ scripts/
 | `npm run preview` | Serve production build locally |
 | `npm test` | Run tests in watch mode |
 | `npm run test:run` | Run tests once |
+| `npm run changelog:watch` | Watch repository changes and append changelog entries |
+| `npm run changelog:scan` | Run a one-time changelog scan |
+| `npm run changelog:status` | Show changelog watcher status |
+| `npm run changelog:stop` | Stop the changelog watcher |
+
+## Testing Notes
+
+```bash
+# Run one test file
+npm run test:run -- src/context/ThemeContext.test.tsx
+
+# Run one test by name
+npm run test:run -- src/context/ThemeContext.test.tsx -t "throws when useTheme is used outside ThemeProvider"
+```
+
+Use `npm test` during active development for watch mode and faster feedback.
 
 ## Data
 

@@ -43,6 +43,22 @@ export interface DictionaryEntry {
   references: string[];
 }
 
+export interface DictionaryCandidateFeatures {
+  exactTermMatch: number;
+  contextDefinitionOverlap: number;
+  referenceSupport: number;
+  bookReferencePrior: number;
+  categoryPrior: number;
+  queryDefinitionOverlap: number;
+}
+
+export interface DictionaryCandidate {
+  entry: DictionaryEntry;
+  score: number;
+  confidence: number;
+  features: DictionaryCandidateFeatures;
+}
+
 export type Translation = 'nasb';
 
 export type ViewMode = 'read' | 'search' | 'bookmarks' | 'dictionary';

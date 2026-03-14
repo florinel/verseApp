@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { DictionaryEntry } from '../types/bible';
+import { DictionaryCandidate, DictionaryEntry } from '../types/bible';
+import { rankDictionaryCandidates } from '../utils/disambiguate';
 
 const CATEGORIES = ['people', 'places', 'events', 'topics'] as const;
 
@@ -66,5 +67,20 @@ export function useDictionary() {
     return entries.filter(e => e.category === category);
   }, [entries]);
 
-  return { entries, loading, lookup, searchEntries, isKnownTerm, getByCategory };
+  const getCandidates = useCallback((term: string, contextText: string, currentBook?: string): DictionaryCandidate[] => {
+    return rankDictionaryCandidates({
+      term,
+      entries,
+      contextText,
+      currentBook,
+      limit: 5,
+    });
+  }, [entries]);
+
+  const resolveBestCandidate = useCallback((term: string, contextText: string, currentBook?: string): DictionaryEntry | undefined => {
+    const candidates = getCandidates(term, contextText, currentBook);
+    return candidates[0]?.entry;
+  }, [getCandidates]);
+
+  return { entries, loading, lookup, searchEntries, isKnownTerm, getByCategory, getCandidates, resolveBestCandidate };
 }

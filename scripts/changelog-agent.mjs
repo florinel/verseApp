@@ -1,6 +1,8 @@
 import { promises as fs } from 'node:fs';
 import process from 'node:process';
 import path from 'node:path';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -13,6 +15,7 @@ const DEFAULT_INTERVAL_MS = 1000;
 const IGNORED_TOP_LEVEL = new Set(['.git', 'node_modules', 'dist']);
 const IGNORED_EXACT = new Set(['changelog.md']);
 const TEMP_FILE_SUFFIXES = ['.swp', '.tmp', '.temp', '.bak', '~'];
+const execFileAsync = promisify(execFile);
 
 function normalizePath(relativePath) {
   return relativePath.split(path.sep).join('/');
@@ -100,6 +103,96 @@ async function createSnapshot() {
   return snapshot;
 }
 
+function describeFileRole(filePath) {
+  const normalized = normalizePath(filePath);
+  const extension = path.posix.extname(normalized);
+  const baseName = path.posix.basename(normalized);
+
+  if (normalized === 'package.json') return 'package manifest';
+  if (normalized === 'package-lock.json') return 'package lockfile';
+  if (normalized === 'README.md') return 'project README';
+  if (normalized === 'changelog.md') return 'project changelog';
+  if (normalized === 'tsconfig.json') return 'TypeScript configuration';
+  if (normalized === 'vite.config.ts') return 'Vite configuration';
+  if (normalized === 'vitest.config.ts') return 'Vitest configuration';
+  if (normalized.startsWith('.github/agents/')) return 'Copilot custom agent definition';
+  if (normalized.startsWith('.github/')) return 'GitHub configuration file';
+  if (normalized.startsWith('scripts/')) return 'automation script';
+  if (normalized.startsWith('public/data/bible/')) return 'Bible data file';
+  if (normalized.startsWith('public/data/dictionaries/')) return 'dictionary data file';
+  if (normalized.startsWith('src/components/') && normalized.endsWith('.test.tsx')) return 'React component test';
+  if (normalized.startsWith('src/components/')) return 'React component';
+  if (normalized.startsWith('src/context/') && normalized.endsWith('.test.tsx')) return 'context test';
+  if (normalized.startsWith('src/context/')) return 'context provider';
+  if (normalized.startsWith('src/hooks/') && normalized.endsWith('.test.ts')) return 'hook test';
+  if (normalized.startsWith('src/hooks/') && normalized.endsWith('.test.tsx')) return 'hook test';
+  if (normalized.startsWith('src/hooks/')) return 'custom hook';
+  if (normalized.startsWith('src/test/')) return 'test utility';
+  if (normalized.startsWith('src/types/')) return 'shared type definition';
+  if (normalized.startsWith('src/') && extension === '.css') return 'application stylesheet';
+  if (normalized.startsWith('src/') && ['.ts', '.tsx'].includes(extension)) return 'application source file';
+  if (extension === '.md') return 'documentation file';
+  if (extension === '.txt') return 'text file';
+  if (extension === '.json') return 'JSON data/config file';
+  if (extension === '.ts' || extension === '.tsx') return 'TypeScript source file';
+  if (extension === '.mjs' || extension === '.js') return 'JavaScript script';
+  if (!extension && baseName) return 'repository file';
+
+  return extension ? `${extension.slice(1)} file` : 'repository file';
+}
+
+function describeArea(filePath) {
+  const normalized = normalizePath(filePath);
+
+  if (normalized.startsWith('src/components/')) return 'UI layer';
+  if (normalized.startsWith('src/context/')) return 'state management';
+  if (normalized.startsWith('src/hooks/')) return 'data/loading logic';
+  if (normalized.startsWith('src/test/')) return 'test infrastructure';
+  if (normalized.startsWith('src/types/')) return 'shared typing';
+  if (normalized.startsWith('public/data/')) return 'static content';
+  if (normalized.startsWith('scripts/')) return 'project automation';
+  if (normalized.startsWith('.github/')) return 'Copilot/GitHub tooling';
+
+  return 'project root';
+}
+
+function buildEventSummary(event) {
+  const role = describeFileRole(event.filePath);
+  const area = describeArea(event.filePath);
+  const verb =
+    event.type === 'added'
+      ? 'Added'
+      : event.type === 'removed'
+        ? 'Removed'
+        : 'Updated';
+
+  return `${verb} ${role} in ${area.toLowerCase()}`;
+}
+
+async function getLastCommitMessage(filePath) {
+  try {
+    const { stdout } = await execFileAsync(
+      'git',
+      ['--no-pager', 'log', '-1', '--pretty=%s', '--', filePath],
+      { cwd: repoRoot },
+    );
+    const message = stdout.trim();
+    return message || null;
+  } catch {
+    return null;
+  }
+}
+
+async function enrichEvents(events) {
+  return Promise.all(
+    events.map(async event => ({
+      ...event,
+      summary: buildEventSummary(event),
+      lastCommitMessage: await getLastCommitMessage(event.filePath),
+    })),
+  );
+}
+
 function diffSnapshots(previous, next) {
   const events = [];
   const previousPaths = new Set(Object.keys(previous));
@@ -144,24 +237,40 @@ async function appendEvents(events) {
 
   await ensureChangelogFile();
 
-  const grouped = groupEvents(events);
+  const enrichedEvents = await enrichEvents(events);
+  const grouped = groupEvents(enrichedEvents);
   const lines = [`## ${timestampLabel()}`, ''];
 
   if (grouped.added.length > 0) {
     lines.push('### Added');
-    lines.push(...grouped.added.map(event => `- \`${event.filePath}\``));
+    lines.push(
+      ...grouped.added.flatMap(event => [
+        `- \`${event.filePath}\` — ${event.summary}`,
+        ...(event.lastCommitMessage ? [`  - Last commit touching this path: ${event.lastCommitMessage}`] : []),
+      ]),
+    );
     lines.push('');
   }
 
   if (grouped.changed.length > 0) {
     lines.push('### Changed');
-    lines.push(...grouped.changed.map(event => `- \`${event.filePath}\``));
+    lines.push(
+      ...grouped.changed.flatMap(event => [
+        `- \`${event.filePath}\` — ${event.summary}`,
+        ...(event.lastCommitMessage ? [`  - Last commit touching this path: ${event.lastCommitMessage}`] : []),
+      ]),
+    );
     lines.push('');
   }
 
   if (grouped.removed.length > 0) {
     lines.push('### Removed');
-    lines.push(...grouped.removed.map(event => `- \`${event.filePath}\``));
+    lines.push(
+      ...grouped.removed.flatMap(event => [
+        `- \`${event.filePath}\` — ${event.summary}`,
+        ...(event.lastCommitMessage ? [`  - Last commit touching this path: ${event.lastCommitMessage}`] : []),
+      ]),
+    );
     lines.push('');
   }
 
