@@ -1,14 +1,27 @@
+import type { DictionaryCandidateFeatures } from '../types/bible';
+
 export const DISAMBIGUATION_CONTEXT_WINDOW = 5;
 export const DISAMBIGUATION_MAX_REFERENCE_NORM = 10;
 
 export const DISAMBIGUATION_WEIGHTS = {
   exactTermMatch: 0.35,
+  exactReferencePrior: 0.45,
   contextDefinitionOverlap: 0.3,
   referenceSupport: 0.15,
   bookReferencePrior: 0.1,
   categoryPrior: 0.05,
   queryDefinitionOverlap: 0.05,
 } as const;
+
+export const DISAMBIGUATION_FEATURE_KEYS: Array<keyof DictionaryCandidateFeatures> = [
+  'exactTermMatch',
+  'exactReferencePrior',
+  'contextDefinitionOverlap',
+  'referenceSupport',
+  'bookReferencePrior',
+  'categoryPrior',
+  'queryDefinitionOverlap',
+];
 
 export const DISAMBIGUATION_CATEGORY_PRIOR = {
   person: 1,

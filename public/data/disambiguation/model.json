@@ -1,0 +1,19 @@
+{
+  "version": "logreg-v1",
+  "trainedAt": "2026-03-14T01:39:50.084Z",
+  "featureWeights": {
+    "exactTermMatch": -0.5305579226357207,
+    "exactReferencePrior": 1.4562253122711044,
+    "contextDefinitionOverlap": -0.03998101480578429,
+    "referenceSupport": 0.1348847799736278,
+    "bookReferencePrior": 0.2529286622998762,
+    "categoryPrior": -0.36865314325537013,
+    "queryDefinitionOverlap": 0
+  },
+  "intercept": -0.5378241806059144,
+  "metrics": {
+    "samples": 13910,
+    "accuracy": 0.7239,
+    "loss": 0.566822
+  }
+}

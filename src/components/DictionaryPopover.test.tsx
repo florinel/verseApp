@@ -134,6 +134,7 @@ describe('DictionaryPopover', () => {
         confidence: 0.1,
         features: {
           exactTermMatch: 1,
+          exactReferencePrior: 0,
           contextDefinitionOverlap: 0.3,
           referenceSupport: 0.2,
           bookReferencePrior: 0,
@@ -147,6 +148,7 @@ describe('DictionaryPopover', () => {
         confidence: 0.1,
         features: {
           exactTermMatch: 1,
+          exactReferencePrior: 0,
           contextDefinitionOverlap: 0.2,
           referenceSupport: 0.1,
           bookReferencePrior: 0,

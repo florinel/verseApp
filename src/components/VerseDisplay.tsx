@@ -39,7 +39,7 @@ export function VerseDisplay() {
     return new RegExp(`\\b(${escaped.join('|')})\\b`, 'gi');
   }, [entries]);
 
-  const renderVerseText = useCallback((text: string): ReactNode => {
+  const renderVerseText = useCallback((text: string, verseNumber: number): ReactNode => {
     if (!termRegex) return text;
 
     const parts: Array<{ text: string; isTerm: boolean }> = [];
@@ -63,7 +63,7 @@ export function VerseDisplay() {
 
     return parts.map((part, i) => {
       if (!part.isTerm) return <Fragment key={i}>{part.text}</Fragment>;
-      const candidates = getCandidates(part.text, text, currentBook);
+      const candidates = getCandidates(part.text, text, currentBook, currentChapter, verseNumber);
       const topCandidate = candidates[0];
       const fallbackEntry = lookup(part.text);
       const useRankedEntry = topCandidate && (candidates.length === 1 || topCandidate.confidence >= DISAMBIGUATION_MIN_CONFIDENCE);
@@ -81,7 +81,7 @@ export function VerseDisplay() {
         </DictionaryPopover>
       );
     });
-  }, [termRegex, getCandidates, currentBook, lookup, handleDictSearch]);
+  }, [termRegex, getCandidates, currentBook, currentChapter, lookup, handleDictSearch]);
 
   if (loading) {
     return (
@@ -134,7 +134,7 @@ export function VerseDisplay() {
                 }`}
             >
               <sup className="text-[10px] font-sans font-bold text-amber-700 dark:text-amber-400 align-super mr-0.5 select-none">{v.verse}</sup>
-              <span className="text-gray-800 dark:text-gray-200">{renderVerseText(v.text)}</span>
+              <span className="text-gray-800 dark:text-gray-200">{renderVerseText(v.text, v.verse)}</span>
               {/* Action bar appears when verse is selected */}
               {isSelected && (
                 <span

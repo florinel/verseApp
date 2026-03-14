@@ -213,6 +213,7 @@ describe('VerseDisplay', () => {
         confidence: 1,
         features: {
           exactTermMatch: 1,
+          exactReferencePrior: 0,
           contextDefinitionOverlap: 1,
           referenceSupport: 0,
           bookReferencePrior: 0,

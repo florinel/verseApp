@@ -45,6 +45,7 @@ export interface DictionaryEntry {
 
 export interface DictionaryCandidateFeatures {
   exactTermMatch: number;
+  exactReferencePrior: number;
   contextDefinitionOverlap: number;
   referenceSupport: number;
   bookReferencePrior: number;
@@ -57,6 +58,18 @@ export interface DictionaryCandidate {
   score: number;
   confidence: number;
   features: DictionaryCandidateFeatures;
+}
+
+export interface DisambiguationModel {
+  version: string;
+  trainedAt: string;
+  featureWeights: Partial<Record<keyof DictionaryCandidateFeatures, number>>;
+  intercept?: number;
+  metrics?: {
+    samples?: number;
+    accuracy?: number;
+    loss?: number;
+  };
 }
 
 export type Translation = 'nasb';

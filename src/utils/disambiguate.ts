@@ -1,6 +1,7 @@
 import {
   DISAMBIGUATION_CATEGORY_PRIOR,
   DISAMBIGUATION_CONTEXT_WINDOW,
+  DISAMBIGUATION_FEATURE_KEYS,
   DISAMBIGUATION_MAX_REFERENCE_NORM,
   DISAMBIGUATION_WEIGHTS,
 } from '../config/disambiguation';
@@ -8,7 +9,59 @@ import type {
   DictionaryCandidate,
   DictionaryCandidateFeatures,
   DictionaryEntry,
+  DisambiguationModel,
 } from '../types/bible';
+
+let activeModel: DisambiguationModel | null = null;
+
+function sigmoid(x: number): number {
+  return 1 / (1 + Math.exp(-x));
+}
+
+function normalizeBookName(name: string): string {
+  return name.toLowerCase().replace(/\s+/g, ' ').trim();
+}
+
+function parseReference(ref: string): { book: string; chapter: number; verse: number } | null {
+  const match = ref.trim().match(/^(.*?)\s+(\d+):(\d+)$/);
+  if (!match) return null;
+  return {
+    book: normalizeBookName(match[1]),
+    chapter: Number(match[2]),
+    verse: Number(match[3]),
+  };
+}
+
+function exactReferencePrior(
+  entry: DictionaryEntry,
+  currentBook?: string,
+  currentChapter?: number,
+  currentVerse?: number,
+): number {
+  if (!currentBook || !currentChapter || !currentVerse) return 0;
+  const targetBook = normalizeBookName(currentBook);
+  return entry.references.some(ref => {
+    const parsed = parseReference(ref);
+    return !!parsed && parsed.book === targetBook && parsed.chapter === currentChapter && parsed.verse === currentVerse;
+  }) ? 1 : 0;
+}
+
+function activeWeights(): Record<keyof DictionaryCandidateFeatures, number> {
+  const learned = activeModel?.featureWeights ?? {};
+  return {
+    exactTermMatch: learned.exactTermMatch ?? DISAMBIGUATION_WEIGHTS.exactTermMatch,
+    exactReferencePrior: learned.exactReferencePrior ?? DISAMBIGUATION_WEIGHTS.exactReferencePrior,
+    contextDefinitionOverlap: learned.contextDefinitionOverlap ?? DISAMBIGUATION_WEIGHTS.contextDefinitionOverlap,
+    referenceSupport: learned.referenceSupport ?? DISAMBIGUATION_WEIGHTS.referenceSupport,
+    bookReferencePrior: learned.bookReferencePrior ?? DISAMBIGUATION_WEIGHTS.bookReferencePrior,
+    categoryPrior: learned.categoryPrior ?? DISAMBIGUATION_WEIGHTS.categoryPrior,
+    queryDefinitionOverlap: learned.queryDefinitionOverlap ?? DISAMBIGUATION_WEIGHTS.queryDefinitionOverlap,
+  };
+}
+
+export function setDisambiguationModel(model: DisambiguationModel | null) {
+  activeModel = model;
+}
 
 function tokenize(text: string): string[] {
   return text
@@ -75,6 +128,8 @@ function candidateFeatures(
   term: string,
   contextText: string,
   currentBook?: string,
+  currentChapter?: number,
+  currentVerse?: number,
   queryText?: string,
 ): DictionaryCandidateFeatures {
   const normalizedTerm = term.toLowerCase();
@@ -83,6 +138,7 @@ function candidateFeatures(
   const defTokens = uniqueTokens(entry.definition);
   return {
     exactTermMatch,
+    exactReferencePrior: exactReferencePrior(entry, currentBook, currentChapter, currentVerse),
     contextDefinitionOverlap: overlapRatio(contextTokens, defTokens),
     referenceSupport: referenceSupportScore(entry),
     bookReferencePrior: bookReferencePrior(entry, currentBook),
@@ -92,14 +148,11 @@ function candidateFeatures(
 }
 
 function aggregateScore(features: DictionaryCandidateFeatures): number {
-  return (
-    features.exactTermMatch * DISAMBIGUATION_WEIGHTS.exactTermMatch +
-    features.contextDefinitionOverlap * DISAMBIGUATION_WEIGHTS.contextDefinitionOverlap +
-    features.referenceSupport * DISAMBIGUATION_WEIGHTS.referenceSupport +
-    features.bookReferencePrior * DISAMBIGUATION_WEIGHTS.bookReferencePrior +
-    features.categoryPrior * DISAMBIGUATION_WEIGHTS.categoryPrior +
-    features.queryDefinitionOverlap * DISAMBIGUATION_WEIGHTS.queryDefinitionOverlap
-  );
+  const weights = activeWeights();
+  const linearScore = DISAMBIGUATION_FEATURE_KEYS.reduce((sum, key) => {
+    return sum + features[key] * weights[key];
+  }, activeModel?.intercept ?? 0);
+  return activeModel ? sigmoid(linearScore) : linearScore;
 }
 
 function confidenceForRank(sorted: DictionaryCandidate[], idx: number): number {
@@ -117,6 +170,8 @@ interface RankDictionaryCandidatesInput {
   entries: DictionaryEntry[];
   contextText: string;
   currentBook?: string;
+  currentChapter?: number;
+  currentVerse?: number;
   queryText?: string;
   limit?: number;
 }
@@ -126,6 +181,8 @@ export function rankDictionaryCandidates({
   entries,
   contextText,
   currentBook,
+  currentChapter,
+  currentVerse,
   queryText,
   limit,
 }: RankDictionaryCandidatesInput): DictionaryCandidate[] {
@@ -137,7 +194,7 @@ export function rankDictionaryCandidates({
 
   const ranked = candidatesPool
     .map(entry => {
-      const features = candidateFeatures(entry, term, contextText, currentBook, queryText);
+      const features = candidateFeatures(entry, term, contextText, currentBook, currentChapter, currentVerse, queryText);
       return {
         entry,
         features,
