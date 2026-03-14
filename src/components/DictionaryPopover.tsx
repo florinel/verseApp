@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, ReactNode } from 'react';
-import { DictionaryEntry } from '../types/bible';
+import { DictionaryCandidate, DictionaryEntry } from '../types/bible';
+import { DISAMBIGUATION_MIN_CONFIDENCE } from '../config/disambiguation';
 
 /** Split definition text so that "-See TERM" becomes a clickable link */
 function renderDefinition(
@@ -27,14 +28,21 @@ function renderDefinition(
   });
 }
 
-export function DictionaryPopover({ entry, children, onSearch }: {
+export function DictionaryPopover({ entry, children, onSearch, candidates, confidence }: {
   entry: DictionaryEntry;
   children: React.ReactNode;
   onSearch?: (term: string) => void;
+  candidates?: DictionaryCandidate[];
+  confidence?: number;
 }) {
   const [open, setOpen] = useState(false);
+  const [selectedEntry, setSelectedEntry] = useState(entry);
   const ref = useRef<HTMLDivElement>(null);
   const hoverTimeout = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  useEffect(() => {
+    setSelectedEntry(entry);
+  }, [entry]);
 
   useEffect(() => {
     if (!open) return;
@@ -55,6 +63,15 @@ export function DictionaryPopover({ entry, children, onSearch }: {
     if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
   };
 
+  const hasAlternatives = (candidates?.length ?? 0) > 1;
+  const confidenceLabel =
+    typeof confidence === 'number'
+      ? confidence >= DISAMBIGUATION_MIN_CONFIDENCE
+        ? 'High confidence'
+        : 'Low confidence'
+      : null;
+  const otherMatches = (candidates ?? []).filter(c => c.entry.definition !== selectedEntry.definition);
+
   return (
     <span className="relative inline" ref={ref}>
       <span
@@ -71,8 +88,13 @@ export function DictionaryPopover({ entry, children, onSearch }: {
           p-4 text-sm font-sans animate-in">
           <div className="flex items-start justify-between mb-2">
             <div>
-              <h4 className="font-bold text-amber-800 dark:text-amber-400">{entry.term}</h4>
-              <span className="text-xs text-gray-500 dark:text-gray-400 capitalize">{entry.category}</span>
+              <h4 className="font-bold text-amber-800 dark:text-amber-400">{selectedEntry.term}</h4>
+              <span className="text-xs text-gray-500 dark:text-gray-400 capitalize">{selectedEntry.category}</span>
+              {confidenceLabel && (
+                <div className="text-[11px] text-gray-500 dark:text-gray-400 mt-1" aria-label="Match confidence">
+                  {confidenceLabel}
+                </div>
+              )}
             </div>
             <button
               onClick={() => setOpen(false)}
@@ -85,15 +107,32 @@ export function DictionaryPopover({ entry, children, onSearch }: {
             </button>
           </div>
           <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-2">
-            {renderDefinition(entry.definition, (term) => {
+            {renderDefinition(selectedEntry.definition, (term) => {
               setOpen(false);
               if (onSearch) onSearch(term);
             })}
           </p>
-          {entry.references.length > 0 && (
+          {selectedEntry.references.length > 0 && (
             <div className="text-xs text-gray-500 dark:text-gray-400">
               <span className="font-semibold">References:</span>{' '}
-              {entry.references.join(', ')}
+              {selectedEntry.references.join(', ')}
+            </div>
+          )}
+          {hasAlternatives && (
+            <div className="mt-3 pt-2 border-t border-parchment-200 dark:border-gray-700">
+              <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1">Other matches</p>
+              <div className="space-y-1">
+                {otherMatches.slice(0, 3).map((candidate, idx) => (
+                  <button
+                    key={`${candidate.entry.term}-${candidate.entry.category}-${idx}`}
+                    onClick={() => setSelectedEntry(candidate.entry)}
+                    className="w-full text-left text-xs text-amber-700 dark:text-amber-400 hover:underline"
+                  >
+                    {candidate.entry.category}: {candidate.entry.definition.slice(0, 80)}
+                    {candidate.entry.definition.length > 80 ? '...' : ''}
+                  </button>
+                ))}
+              </div>
             </div>
           )}
           {/* Arrow */}

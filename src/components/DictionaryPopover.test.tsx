@@ -108,4 +108,60 @@ describe('DictionaryPopover', () => {
     const headings = screen.getAllByText('Moses');
     expect(headings.length).toBeGreaterThanOrEqual(2); // trigger + popover heading
   });
+
+  it('shows confidence label when confidence is provided', async () => {
+    const user = userEvent.setup();
+    render(
+      <DictionaryPopover entry={mockEntry} confidence={0.05}>Moses</DictionaryPopover>
+    );
+    await user.click(screen.getByText('Moses'));
+    expect(screen.getByLabelText('Match confidence')).toHaveTextContent('Low confidence');
+  });
+
+  it('shows other matches and allows switching to an alternative', async () => {
+    const user = userEvent.setup();
+    const altEntry = {
+      term: 'Moses',
+      category: 'topic' as const,
+      definition: 'A topic-oriented Moses entry for disambiguation.',
+      references: ['Hebrews 11:24'],
+    };
+
+    const candidates = [
+      {
+        entry: mockEntry,
+        score: 0.9,
+        confidence: 0.1,
+        features: {
+          exactTermMatch: 1,
+          contextDefinitionOverlap: 0.3,
+          referenceSupport: 0.2,
+          bookReferencePrior: 0,
+          categoryPrior: 1,
+          queryDefinitionOverlap: 0,
+        },
+      },
+      {
+        entry: altEntry,
+        score: 0.8,
+        confidence: 0.1,
+        features: {
+          exactTermMatch: 1,
+          contextDefinitionOverlap: 0.2,
+          referenceSupport: 0.1,
+          bookReferencePrior: 0,
+          categoryPrior: 0.7,
+          queryDefinitionOverlap: 0,
+        },
+      },
+    ];
+
+    render(
+      <DictionaryPopover entry={mockEntry} candidates={candidates} confidence={0.1}>Moses</DictionaryPopover>
+    );
+    await user.click(screen.getByText('Moses'));
+    expect(screen.getByText('Other matches')).toBeInTheDocument();
+    await user.click(screen.getByText(/topic: A topic-oriented Moses entry/));
+    expect(screen.getByText(altEntry.definition)).toBeInTheDocument();
+  });
 });
