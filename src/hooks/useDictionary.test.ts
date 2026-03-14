@@ -1,5 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react';
-import { useDictionary } from './useDictionary';
+import { __resetDictionaryCacheForTests, useDictionary } from './useDictionary';
 
 // Since useDictionary uses a module-level cache, we need to be aware of test ordering
 describe('useDictionary', () => {
@@ -180,5 +180,45 @@ describe('useDictionary', () => {
     for (const p of persons) expect(p.category).toBe('person');
     const topics = result.current.getByCategory('topic');
     for (const t of topics) expect(t.category).toBe('topic');
+  });
+
+  it('loads override entries so ambiguous terms can have multiple candidates', async () => {
+    __resetDictionaryCacheForTests();
+
+    global.fetch = vi.fn().mockImplementation((url: string) => {
+      if (url.includes('people-overrides')) {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve([
+            {
+              term: 'Jesus',
+              category: 'person',
+              definition: 'Jesus of Nazareth',
+              references: ['John 3:16'],
+            },
+          ]),
+        });
+      }
+      if (url.includes('people')) {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve([
+            {
+              term: 'Jesus',
+              category: 'person',
+              definition: "Paul's fellow worker in Colossians",
+              references: ['Colossians 4:11'],
+            },
+          ]),
+        });
+      }
+      return Promise.resolve({ ok: true, json: () => Promise.resolve([]) });
+    });
+
+    const { result } = renderHook(() => useDictionary());
+    await waitFor(() => expect(result.current.loading).toBe(false));
+
+    const jesusEntries = result.current.entries.filter(e => e.term === 'Jesus');
+    expect(jesusEntries.length).toBeGreaterThanOrEqual(2);
   });
 });

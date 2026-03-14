@@ -2,6 +2,7 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { DictionaryBrowser } from './DictionaryBrowser';
 import { renderWithProviders } from '../test/renderWithProviders';
+import { __resetDictionaryCacheForTests } from '../hooks/useDictionary';
 
 const mockPeople = [
   { term: 'Abraham', category: 'person', definition: 'Father of many nations', references: ['Genesis 12:1'] },
@@ -21,6 +22,7 @@ describe('DictionaryBrowser', () => {
   let store: Record<string, string>;
 
   beforeEach(() => {
+    __resetDictionaryCacheForTests();
     store = {};
     vi.spyOn(Storage.prototype, 'getItem').mockImplementation((key) => store[key] ?? null);
     vi.spyOn(Storage.prototype, 'setItem').mockImplementation((key, val) => { store[key] = val; });
@@ -33,6 +35,7 @@ describe('DictionaryBrowser', () => {
       })),
     });
     global.fetch = vi.fn().mockImplementation((url: string) => {
+      if (url.includes('people-overrides')) return Promise.resolve({ ok: true, json: () => Promise.resolve([]) });
       if (url.includes('people')) return Promise.resolve({ ok: true, json: () => Promise.resolve(mockPeople) });
       if (url.includes('places')) return Promise.resolve({ ok: true, json: () => Promise.resolve(mockPlaces) });
       if (url.includes('events')) return Promise.resolve({ ok: true, json: () => Promise.resolve(mockEvents) });
