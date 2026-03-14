@@ -39,6 +39,7 @@ export function BibleProvider({ children }: { children: ReactNode }) {
     setCurrentChapter(1);
   }, []);
 
+  // Advance to the next chapter; wraps to the first chapter of the next book at the end.
   const nextChapter = useCallback(() => {
     if (currentChapter < totalChapters) {
       setCurrentChapter(c => c + 1);
@@ -51,6 +52,7 @@ export function BibleProvider({ children }: { children: ReactNode }) {
     }
   }, [currentBook, currentChapter, totalChapters]);
 
+  // Go back one chapter; wraps to the last chapter of the previous book at the start.
   const prevChapter = useCallback(() => {
     if (currentChapter > 1) {
       setCurrentChapter(c => c - 1);

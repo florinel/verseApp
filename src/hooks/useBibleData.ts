@@ -2,8 +2,17 @@ import { useState, useEffect } from 'react';
 import { BookData, Translation } from '../types/bible';
 import { bookFileName } from '../bibleBooks';
 
+/** In-memory cache keyed by `"translation/bookName"` to avoid redundant fetches across renders. */
 const cache = new Map<string, BookData>();
 
+/**
+ * Fetches and caches the JSON data for a single Bible book.
+ * Returns the cached result immediately on repeat calls for the same book/translation pair.
+ *
+ * @param bookName - Full book name as it appears in `BIBLE_BOOKS`, e.g. `"Genesis"`
+ * @param translation - Translation identifier, e.g. `"nasb"`
+ * @returns `{ data, loading, error }` — `data` is `null` until the fetch resolves
+ */
 export function useBibleData(bookName: string, translation: Translation) {
   const [data, setData] = useState<BookData | null>(cache.get(`${translation}/${bookName}`) ?? null);
   const [loading, setLoading] = useState(!cache.has(`${translation}/${bookName}`));

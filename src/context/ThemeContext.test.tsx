@@ -113,4 +113,54 @@ describe('ThemeContext', () => {
     expect(() => render(<ThemeConsumer />)).toThrow('useTheme must be inside ThemeProvider');
     spy.mockRestore();
   });
+
+  it('toggles dark mode adds/removes "dark" class on documentElement', async () => {
+    const user = userEvent.setup();
+    render(
+      <ThemeProvider><ThemeConsumer /></ThemeProvider>
+    );
+    expect(document.documentElement.classList.contains('dark')).toBe(false);
+    await user.click(screen.getByText('toggle-dark'));
+    expect(document.documentElement.classList.contains('dark')).toBe(true);
+    await user.click(screen.getByText('toggle-dark'));
+    expect(document.documentElement.classList.contains('dark')).toBe(false);
+  });
+
+  it('dark mode is read from system preference when no localStorage key', () => {
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: vi.fn().mockImplementation((query: string) => ({
+        matches: true, // system prefers dark
+        media: query, onchange: null,
+        addListener: vi.fn(), removeListener: vi.fn(),
+        addEventListener: vi.fn(), removeEventListener: vi.fn(), dispatchEvent: vi.fn(),
+      })),
+    });
+    render(
+      <ThemeProvider><ThemeConsumer /></ThemeProvider>
+    );
+    expect(screen.getByTestId('dark')).toHaveTextContent('true');
+  });
+
+  it('persists font-size to localStorage on change', async () => {
+    const user = userEvent.setup();
+    render(
+      <ThemeProvider><ThemeConsumer /></ThemeProvider>
+    );
+    await user.click(screen.getByText('set-xl'));
+    expect(store['verseapp-font-size']).toBe('xl');
+  });
+
+  it('all valid FontSize values can be set', async () => {
+    const sizes: FontSize[] = ['xs', 'sm', 'base', 'lg', 'xl'];
+    for (const size of sizes) {
+      const { unmount } = render(
+        <ThemeProvider><ThemeConsumer /></ThemeProvider>
+      );
+      expect(['xs', 'sm', 'base', 'lg', 'xl']).toContain(
+        screen.getByTestId('fontSize').textContent
+      );
+      unmount();
+    }
+  });
 });

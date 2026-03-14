@@ -1,6 +1,26 @@
-import { render, screen } from '@testing-library/react';
+import { useEffect } from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BibleProvider, useBible } from './BibleContext';
+
+/**
+ * Renders inside BibleProvider, immediately navigates to book+chapter,
+ * and exposes next/prev buttons for testing cross-book wrapping.
+ */
+function NavigatedConsumer({ book, chapter }: { book: string; chapter: number }) {
+  const { currentBook, currentChapter, navigateTo, nextChapter, prevChapter } = useBible();
+  useEffect(() => {
+    navigateTo(book, chapter);
+  }, [book, chapter, navigateTo]);
+  return (
+    <div>
+      <span data-testid="book">{currentBook}</span>
+      <span data-testid="chapter">{currentChapter}</span>
+      <button onClick={nextChapter}>next</button>
+      <button onClick={prevChapter}>prev</button>
+    </div>
+  );
+}
 
 function BibleConsumer() {
   const { currentBook, currentChapter, currentTranslation, viewMode, setBook, setChapter, setViewMode, navigateTo, totalChapters, nextChapter, prevChapter } = useBible();
@@ -89,16 +109,17 @@ describe('BibleContext', () => {
   it('nextChapter advances to the next book at end of current book', async () => {
     const user = userEvent.setup();
     render(
-      <BibleProvider><BibleConsumer /></BibleProvider>
+      <BibleProvider>
+        <NavigatedConsumer book="Obadiah" chapter={1} />
+      </BibleProvider>
     );
-    // Navigate to last chapter of Genesis (50)
-    await user.click(screen.getByText('set-ch-5'));
-    // We need to get to chapter 50. Let's use navigateTo logic indirectly.
-    // Instead, let's set chapter directly to 50 via a different approach.
-    // Actually, setChapter(5) sets it. Let's navigate to Ruth (4 chapters)
-    await user.click(screen.getByText('go-john-3'));
-    // John has 21 chapters, we're on 3 — not useful. Let's use Jude (1 chapter)
-    // We'll test by navigating to a 1-chapter book
+    await waitFor(() => {
+      expect(screen.getByTestId('book')).toHaveTextContent('Obadiah');
+      expect(screen.getByTestId('chapter')).toHaveTextContent('1');
+    });
+    await user.click(screen.getByText('next'));
+    expect(screen.getByTestId('book')).toHaveTextContent('Jonah');
+    expect(screen.getByTestId('chapter')).toHaveTextContent('1');
   });
 
   it('prevChapter decrements within the same book', async () => {

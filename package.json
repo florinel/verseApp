@@ -8,7 +8,11 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "changelog:watch": "node scripts/changelog-agent.mjs watch",
+    "changelog:scan": "node scripts/changelog-agent.mjs once",
+    "changelog:status": "node scripts/changelog-agent.mjs status",
+    "changelog:stop": "node scripts/changelog-agent.mjs stop"
   },
   "dependencies": {
     "react": "^19.0.0",

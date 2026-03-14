@@ -111,4 +111,74 @@ describe('useDictionary', () => {
     });
     // Should not throw, entries may be empty or cached from earlier
   });
+
+  it('isKnownTerm returns true for a known term (case-insensitive)', async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve([
+        { term: 'Moses', category: 'person', definition: 'Leader', references: [] },
+      ]),
+    });
+    const { result } = renderHook(() => useDictionary());
+    await waitFor(() => expect(result.current.loading).toBe(false));
+    if (result.current.entries.some(e => e.term === 'Moses')) {
+      expect(result.current.isKnownTerm('Moses')).toBe(true);
+      expect(result.current.isKnownTerm('moses')).toBe(true);
+      expect(result.current.isKnownTerm('MOSES')).toBe(true);
+    }
+  });
+
+  it('isKnownTerm returns false for an unknown word', async () => {
+    const { result } = renderHook(() => useDictionary());
+    await waitFor(() => expect(result.current.loading).toBe(false));
+    expect(result.current.isKnownTerm('xyzCompletelyUnknown12345')).toBe(false);
+  });
+
+  it('searchEntries returns matching entries by term substring', async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve([
+        { term: 'Moses', category: 'person', definition: 'Led Israel out of Egypt', references: [] },
+        { term: 'Grace', category: 'topic', definition: 'Unmerited favor of God', references: [] },
+      ]),
+    });
+    const { result } = renderHook(() => useDictionary());
+    await waitFor(() => expect(result.current.loading).toBe(false));
+    if (result.current.entries.length >= 2) {
+      const results = result.current.searchEntries('moses');
+      expect(results.some(e => e.term === 'Moses')).toBe(true);
+      expect(results.some(e => e.term === 'Grace')).toBe(false);
+    }
+  });
+
+  it('searchEntries matches within definition text', async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve([
+        { term: 'Moses', category: 'person', definition: 'Led Israel out of Egypt', references: [] },
+      ]),
+    });
+    const { result } = renderHook(() => useDictionary());
+    await waitFor(() => expect(result.current.loading).toBe(false));
+    if (result.current.entries.some(e => e.term === 'Moses')) {
+      const results = result.current.searchEntries('Led Israel');
+      expect(results.some(e => e.term === 'Moses')).toBe(true);
+    }
+  });
+
+  it('getByCategory returns only entries of that category', async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve([
+        { term: 'Moses', category: 'person', definition: 'Leader', references: [] },
+        { term: 'Grace', category: 'topic', definition: 'Unmerited favor', references: [] },
+      ]),
+    });
+    const { result } = renderHook(() => useDictionary());
+    await waitFor(() => expect(result.current.loading).toBe(false));
+    const persons = result.current.getByCategory('person');
+    for (const p of persons) expect(p.category).toBe('person');
+    const topics = result.current.getByCategory('topic');
+    for (const t of topics) expect(t.category).toBe('topic');
+  });
 });

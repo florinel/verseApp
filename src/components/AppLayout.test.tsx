@@ -105,4 +105,55 @@ describe('AppLayout', () => {
     await user.click(screen.getByLabelText('Toggle sidebar'));
     expect(sidebar).toHaveClass('w-0');
   });
+
+  it('can switch to Search tab', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<AppLayout />);
+    const searchTab = screen.getAllByRole('button').find(
+      btn => btn.getAttribute('title') === 'Search'
+    )!;
+    await user.click(searchTab);
+    // SearchBar input should now be visible
+    expect(screen.getByPlaceholderText('Search verses or references...')).toBeInTheDocument();
+  });
+
+  it('can switch to Bookmarks tab', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<AppLayout />);
+    const bmTab = screen.getAllByRole('button').find(
+      btn => btn.getAttribute('title') === 'Bookmarks'
+    )!;
+    await user.click(bmTab);
+    expect(screen.getByText('No bookmarks yet')).toBeInTheDocument();
+  });
+
+  it('can switch to Dictionary tab', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<AppLayout />);
+    const dictTab = screen.getAllByRole('button').find(
+      btn => btn.getAttribute('title') === 'Dictionary'
+    )!;
+    await user.click(dictTab);
+    await waitFor(() => {
+      expect(screen.getByPlaceholderText('Search dictionary...')).toBeInTheDocument();
+    });
+  });
+
+  it('closes settings modal when backdrop is clicked', async () => {
+    const user = userEvent.setup();
+    renderWithProviders(<AppLayout />);
+    await user.click(screen.getByLabelText('Settings'));
+    expect(screen.getByText('Dark Mode')).toBeInTheDocument();
+    // The backdrop is the fixed overlay — click outside the dialog
+    const backdrop = document.querySelector('.fixed.inset-0')!;
+    await user.click(backdrop);
+    expect(screen.queryByText('Dark Mode')).not.toBeInTheDocument();
+  });
+
+  it('shows Read tab content (VerseDisplay) by default', async () => {
+    renderWithProviders(<AppLayout />);
+    await waitFor(() => {
+      expect(screen.getByText(/In the beginning God created/)).toBeInTheDocument();
+    });
+  });
 });

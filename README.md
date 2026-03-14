@@ -73,7 +73,6 @@ src/
 
 public/data/
 ├── bible/nasb/         66 JSON files, one per book
-├── csv/                Source CSV data (people, places, events, references, etc.)
 └── dictionaries/       4 JSON files: people, places, events, topics
 
 scripts/
@@ -93,7 +92,7 @@ scripts/
 
 ## Data
 
-Bible text is stored as static JSON files under `public/data/bible/nasb/`, one file per book. Dictionary entries (people, places, events, topics) are in `public/data/dictionaries/`. Source data is in CSV format under `public/data/csv/` and can be regenerated using the scripts in `scripts/`.
+Bible text is stored as static JSON files under `public/data/bible/nasb/`, one file per book. Dictionary entries (people, places, events, topics) are in `public/data/dictionaries/`. Both can be regenerated using the scripts in `scripts/`.
 
 ## License
 

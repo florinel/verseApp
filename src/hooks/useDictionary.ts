@@ -3,9 +3,17 @@ import { DictionaryEntry } from '../types/bible';
 
 const CATEGORIES = ['people', 'places', 'events', 'topics'] as const;
 
+/** Module-level cache — all four category files are fetched once and shared across hook instances. */
 let allEntries: DictionaryEntry[] | null = null;
+/** Lowercased term set for O(1) `isKnownTerm` lookups. */
 let termsSet: Set<string> | null = null;
 
+/**
+ * Loads all dictionary entries (people, places, events, topics) and exposes
+ * helpers for lookup, full-text search, and category filtering.
+ *
+ * Data is fetched once per page load; subsequent hook calls reuse the module-level cache.
+ */
 export function useDictionary() {
   const [entries, setEntries] = useState<DictionaryEntry[]>(allEntries ?? []);
   const [loading, setLoading] = useState(!allEntries);

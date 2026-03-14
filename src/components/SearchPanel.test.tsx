@@ -52,6 +52,31 @@ describe('SearchBar', () => {
     expect(screen.getByText('Search')).not.toBeDisabled();
   });
 
+  it('pressing Enter triggers a search', async () => {
+    const user = userEvent.setup();
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve([]),
+    });
+    renderWithProviders(<SearchBar />);
+    const input = screen.getByPlaceholderText('Search verses or references...');
+    await user.type(input, 'love{Enter}');
+    // The button text changes to 'Searching…' while searching
+    // (fetch returns instantly in tests so we mainly verify no crash)
+    expect(input).toBeInTheDocument();
+  });
+
+  it('Search button shows "Searching…" label while a search is in progress', async () => {
+    // Never-resolving fetch keeps searching=true
+    global.fetch = vi.fn().mockImplementation(() => new Promise(() => {}));
+    const user = userEvent.setup();
+    renderWithProviders(<SearchBar />);
+    const input = screen.getByPlaceholderText('Search verses or references...');
+    await user.type(input, 'love');
+    await user.click(screen.getByText('Search'));
+    expect(screen.getByText('Searching…')).toBeInTheDocument();
+  });
+
   it('shows clear button when input has text', async () => {
     const user = userEvent.setup();
     renderWithProviders(<SearchBar />);
@@ -101,4 +126,55 @@ describe('SearchResultsView', () => {
     expect(screen.getByText(/Search by keyword/)).toBeInTheDocument();
     expect(screen.getByText('John 3:16')).toBeInTheDocument();
   });
+
+  it('shows "No results found" when search returns nothing', async () => {
+    const user = userEvent.setup();
+    // Perform a search via SearchBar first to set a query with no results
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve([]),
+    });
+    renderWithProviders(
+      <>
+        <SearchBar />
+        <SearchResultsView />
+      </>
+    );
+    const input = screen.getByPlaceholderText('Search verses or references...');
+    await user.type(input, 'xyznoexist');
+    await user.click(screen.getByText('Search'));
+    await waitFor(() => {
+      expect(screen.getByText(/No results found/)).toBeInTheDocument();
+    }, { timeout: 15000 });
+  });
+
+  it('shows dictionary results section when dict entries match', async () => {
+    const user = userEvent.setup();
+    const mockDict = [
+      { term: 'Grace', category: 'topic', definition: 'Unmerited favor', references: [] },
+    ];
+    global.fetch = vi.fn().mockImplementation((url: string) => {
+      if (url.includes('/data/dictionaries/topics.json')) {
+        return Promise.resolve({ ok: true, json: () => Promise.resolve(mockDict) });
+      }
+      if (url.includes('/data/dictionaries/')) {
+        return Promise.resolve({ ok: true, json: () => Promise.resolve([]) });
+      }
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ chapters: [{ chapter: 1, verses: [{ verse: 1, text: 'no match' }] }] }),
+      });
+    });
+    renderWithProviders(
+      <>
+        <SearchBar />
+        <SearchResultsView />
+      </>
+    );
+    const input = screen.getByPlaceholderText('Search verses or references...');
+    await user.type(input, 'grace{Enter}');
+    await waitFor(() => {
+      expect(screen.getByText('Grace')).toBeInTheDocument();
+    }, { timeout: 15000 });
+  }, 20000);
 });

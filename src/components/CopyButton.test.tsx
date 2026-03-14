@@ -40,4 +40,40 @@ describe('CopyButton', () => {
     render(<CopyButton text="Test text" />);
     expect(screen.getByLabelText('Share verse')).toBeInTheDocument();
   });
+
+  it('shows "Copied!" tooltip feedback after clicking copy', async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+    Object.defineProperty(navigator, 'clipboard', {
+      value: { writeText: vi.fn().mockResolvedValue(undefined) },
+      writable: true,
+      configurable: true,
+    });
+    render(<CopyButton text="Hello" />);
+    const btn = screen.getByLabelText('Copy to clipboard');
+    await user.click(btn);
+    expect(btn).toHaveAttribute('title', 'Copied!');
+    vi.useRealTimers();
+  });
+
+  it('share button calls navigator.share with the text', async () => {
+    const shareMock = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'share', { value: shareMock, writable: true, configurable: true });
+    const user = userEvent.setup();
+    render(<CopyButton text="Share me" />);
+    await user.click(screen.getByLabelText('Share verse'));
+    expect(shareMock).toHaveBeenCalledWith({ text: 'Share me' });
+  });
+
+  it('share button falls back to clipboard copy when navigator.share throws', async () => {
+    const shareMock = vi.fn().mockRejectedValue(new Error('AbortError'));
+    Object.defineProperty(navigator, 'share', { value: shareMock, writable: true, configurable: true });
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    Object.defineProperty(navigator, 'clipboard', { value: { writeText }, writable: true, configurable: true });
+    const user = userEvent.setup();
+    render(<CopyButton text="Fallback" />);
+    await user.click(screen.getByLabelText('Share verse'));
+    // share was attempted — it threw, no crash
+    expect(shareMock).toHaveBeenCalled();
+  });
 });

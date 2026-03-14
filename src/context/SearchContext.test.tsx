@@ -25,6 +25,34 @@ function SearchConsumer() {
   );
 }
 
+/** Helper for testing a chapter-only reference "Genesis 1" */
+function ChapterRefConsumer() {
+  const { refMatch, results, search } = useSearch();
+  return (
+    <div>
+      <span data-testid="cr-ref-match">
+        {refMatch ? `${refMatch.bookName} ${refMatch.chapter}${refMatch.verse ? ':' + refMatch.verse : ''}` : 'none'}
+      </span>
+      <span data-testid="cr-results">{results.length}</span>
+      <button onClick={() => search('Genesis 1', 'nasb')}>search-gen-1</button>
+    </div>
+  );
+}
+
+/** Helper for testing a reference via book abbreviation "Gen 1:1" */
+function AbbrevRefConsumer() {
+  const { refMatch, results, search } = useSearch();
+  return (
+    <div>
+      <span data-testid="ab-ref-match">
+        {refMatch ? `${refMatch.bookName} ${refMatch.chapter}${refMatch.verse ? ':' + refMatch.verse : ''}` : 'none'}
+      </span>
+      <span data-testid="ab-results">{results.length}</span>
+      <button onClick={() => search('Gen 1:1', 'nasb')}>search-gen-abbrev</button>
+    </div>
+  );
+}
+
 describe('SearchContext', () => {
   beforeEach(() => {
     vi.restoreAllMocks();
@@ -158,5 +186,68 @@ describe('SearchContext', () => {
     const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
     expect(() => render(<SearchConsumer />)).toThrow('useSearch must be used within SearchProvider');
     spy.mockRestore();
+  });
+
+  it('handles a chapter-only Bible reference (no verse)', async () => {
+    const user = userEvent.setup();
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({
+        chapters: [{ chapter: 1, verses: [
+          { verse: 1, text: 'In the beginning' },
+          { verse: 2, text: 'The earth was formless' },
+        ]}],
+      }),
+    });
+    const { unmount } = render(
+      <SearchProvider>
+        <ChapterRefConsumer />
+      </SearchProvider>
+    );
+    await user.click(screen.getByText('search-gen-1'));
+    await waitFor(() =>
+      expect(screen.getByTestId('cr-ref-match')).not.toHaveTextContent('none')
+    );
+    expect(screen.getByTestId('cr-ref-match')).toHaveTextContent('Genesis 1');
+    expect(Number(screen.getByTestId('cr-results').textContent)).toBeGreaterThanOrEqual(2);
+    unmount();
+  });
+
+  it('handles a Bible reference via book abbreviation', async () => {
+    const user = userEvent.setup();
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({
+        chapters: [{ chapter: 1, verses: [{ verse: 1, text: 'In the beginning' }] }],
+      }),
+    });
+    const { unmount } = render(
+      <SearchProvider>
+        <AbbrevRefConsumer />
+      </SearchProvider>
+    );
+    await user.click(screen.getByText('search-gen-abbrev'));
+    await waitFor(() =>
+      expect(screen.getByTestId('ab-ref-match')).not.toHaveTextContent('none')
+    );
+    expect(screen.getByTestId('ab-ref-match')).toHaveTextContent('Genesis');
+    unmount();
+  });
+
+  it('detail is cleared when a new search begins', async () => {
+    const user = userEvent.setup();
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({
+        chapters: [{ chapter: 3, verses: [{ verse: 16, text: 'For God so loved' }] }],
+      }),
+    });
+    render(<SearchProvider><SearchConsumer /></SearchProvider>);
+    await user.click(screen.getByText('search-ref'));
+    await waitFor(() => expect(screen.getByTestId('results-count')).not.toHaveTextContent('0'));
+    await user.click(screen.getByText('clear'));
+    expect(screen.getByTestId('results-count')).toHaveTextContent('0');
+    expect(screen.getByTestId('ref-match')).toHaveTextContent('none');
+    expect(screen.getByTestId('query')).toHaveTextContent('');
   });
 });

@@ -71,6 +71,10 @@ export const BIBLE_BOOKS: BibleBook[] = [
   { name: 'Revelation', abbr: 'Rev', chapters: 22, testament: 'NT' },
 ];
 
+/**
+ * Converts a book name to the kebab-case slug used in Bible data file paths.
+ * @example bookFileName('1 Kings') // → '1-kings'
+ */
 export function bookFileName(name: string): string {
   return name.toLowerCase().replace(/\s+/g, '-');
 }
